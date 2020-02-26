@@ -1,0 +1,23 @@
+/* css의 구조 */
+h1 {
+  property-name: value;
+}
+
+/* Class를 사용할때 */
+.name {
+  property-name: value;
+}
+
+/* ID를 사용할 때 */
+#name {
+  property-name: value;
+}
+
+/* Class + 태그 */
+h1.name {
+  property-name: value;
+}
+
+selector(id, class, tag name) {
+  property-name: value;
+}
