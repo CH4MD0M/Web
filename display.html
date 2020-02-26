@@ -1,0 +1,39 @@
+<!-- 
+    - 바로 옆에 아무것도 없는 것을 "블록" 이라고 한다.
+    - 크롬에서 요소검사를 하면 "영역이 블록크기보다 크게잡히는것"은
+      "박스 외에 옆에 있는 것을 허용하지 않기 때문"
+      -> 그래서 무엇이든 그 밑으로 위피하게됨(옆에 있는 것을 허용하지 않기 때문)
+
+    **REPEAT : 블록은 element 크기와 상관 없이 그 옆에 다른 element가 위치하는 거을 허용하지 않음
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inline Example</title>
+    <style>
+      .box {
+        background-color: red;
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+        /* default값은 block이다.
+           inline-block은 "박스"가 옆에 있을 수 있다.*/
+        display: inline-block;
+
+        /* - inline은 "박스"의 모든 property 설정 값을 지운다.
+           - inline으로 설정하면 block이 아니다.
+           - 텍스트처럼 적용된다. (높이도 폭도 없다. 컨텐츠의 길이만 존재한다.*/
+
+        /*display: inline;*/
+      }
+    </style>
+  </head>
+  <body>
+    <span class="box">1</span>
+    <span class="box">1</span>
+    <span class="box">1</span>
+  </body>
+</html>
