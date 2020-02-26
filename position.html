@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Position</title>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        height: 400%;
+        background-color: red;
+      }
+      /* #boxOne {
+        height: 300px;
+        width: 300px;
+        background-color: yellow;
+         - default값은 static이다. 
+           
+        position: static;
+      } 
+      #boxTwo {
+        height: 300px;
+        width: 300px;
+        background-color: green;
+        - default값은 staticdlek. 
+        - fixed를 사용하면 스크롤을 내려도 고정되어 따라 스크롤된다.
+        position: fixed;
+        - top, bottom, right, left 간격을 설정할 수 있다.
+      }
+      */
+
+      .abs-box {
+        width: 400px;
+        height: 400px;
+        background-color: yellow;
+        position: relative;
+      }
+      .abs-child {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        /* 
+        - 해당 element와 관계가 있는 (부모박스: relative) element를 찾고 이에 상응해서 position이 결정된다.
+        - relative position에 상대적으로 position을 잡는것
+        - relative position이 없을 경우, absolute는 문서의 본문 body에 맞춰서 position을 잡는다. */
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="abs-box">
+      <div class="abs-child"></div>
+    </div>
+    <!-- Position : Fixed
+      <div id="boxOne">
+      <div class="box-child"></div>
+    </div>
+    <div id="boxTwo">
+      <div class="box-child"></div>
+    </div> -->
+  </body>
+</html>
