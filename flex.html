@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flex</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      .father {
+        /* 
+        - flex를 적용하면 inline-block을 입력하지 않아도 inline-block방식처럼 출력된다. 
+        - flex를 넣으면 더 이상 블록이 아니다. inline-block이라고 적지 않았기 때문
+        */
+        display: flex;
+        /* 가운데 정렬도 가능 */
+        justify-content: space-between;
+        /* 
+        **justify-content는 수평으로 적용된다.
+
+        justify-content: flex-start;
+        justify-content: flex-end;
+        justify-content: space-between;
+        justify-content: space-around;   // 컨텐츠 뿐만 아니라 주변도 같은 간격으로 조정이 된다.
+         */
+
+        align-items: flex-start;
+        /* 
+        **align-items 는 수직으로 적용된다.
+         */
+
+        flex-direction: row;
+        /* 
+        - default 값은 row이다.
+        - column으로 설정하면 justify-content와 align-items의 방향이 바뀐다고 생각하면된다.
+        - row-reverse 역순으로 출력
+        */
+
+        flex-wrap: no-wrap;
+        /* 
+        - default 값은 no wrap이다.
+        - 박스들 간의 간격을 둘때 사용.
+        - wrap-reverse 역순으로 그리드방식 출력(간격있게)
+         */
+
+        height: 100%;
+      }
+      .box {
+        background-color: red;
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+        display: flex;
+        /* 
+        부모 클래스에만 flex를 적용한다고 했지만 여기서는 숫자를 움직일 것이기 때문에
+        자식인 box에 flex를 적용한다.
+        */
+        justify-content: center;
+        align-items: center;
+        color: white;
+
+        /* 
+        - margin을 일일이 조정하면서 작성했어야 했다.
+        - 화면 크기에 따라서 다른 모습이 보여졌다.
+        
+        - Flex를 적용할 때 자식블록에 적용하지 않는다.
+        - 부모 class에 적용하면 된다.
+        */
+
+        /* margin-right: 5px; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="father">
+      <!-- .box{$}*10 -->
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+      <div class="box">7</div>
+      <div class="box">8</div>
+      <div class="box">9</div>
+      <div class="box">10</div>
+    </div>
+  </body>
+</html>
