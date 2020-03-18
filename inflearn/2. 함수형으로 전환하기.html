@@ -49,6 +49,74 @@
         ages.push(temp_users[i].age);
       }
       console.log(ages);
+
+      // 2. _filter, _map으로 리팩토링
+      function _filter(list, predi) {
+        var new_list = [];
+        for (var i = 0; i < list.length; i++) {
+          if (predi(list[i])) {
+            new_list.push(list[i]);
+          }
+        }
+        return new_list;
+      }
+
+      function _map(list, mapper) {
+        var new_list = [];
+        for (var i = 0; i < temp_users.length; i++) {
+          new_list.push(mapper(list[i]));
+        }
+        return new_list;
+      }
+
+      // _map을 위한 변수 선언
+      var over_30 = _filter(users, function(user) {
+        // function(user) = predi(users[i])
+        return user.age >= 30;
+        //user.age = users[i].age
+      });
+      console.log(over_30);
+
+      var names = _map(over_30, function(user) {
+        //function(user) = mapper(list[i])
+        return user.name;
+      });
+      console.log(names);
+
+      var under_30 = _filter(users, function(user) {
+        return user.age < 30;
+      });
+      console.log(under_30);
+
+      var ages = _map(under_30, function(user) {
+        return user.age;
+      });
+      console.log(ages);
+
+      console.log(
+        _map(
+          _filter(users, function(user) {
+            // function(user) = predi(users[i])
+            return user.age >= 30;
+            //user.age = users[i].age
+          }),
+          function(user) {
+            return user.name;
+          }
+        )
+      );
+      console.log(
+        _map(
+          _filter(users, function(user) {
+            // function(user) = predi(users[i])
+            return user.age < 30;
+            //user.age = users[i].age
+          }),
+          function(user) {
+            return user.age;
+          }
+        )
+      );
     </script>
   </body>
 </html>
