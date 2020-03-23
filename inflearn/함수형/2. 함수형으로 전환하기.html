@@ -16,41 +16,50 @@
         { id: 8, name: "MP", age: 23 }
       ];
 
-      // 1. 명령형 코드
-
-      // 1. 30세 이상인 users를 거른다.
+      //1. 명령형 코드
+      //1. 30세 이상인 users를 거른다.
       var temp_users = [];
       for (var i = 0; i < users.length; i++) {
         if (users[i].age >= 30) {
           temp_users.push(users[i]);
         }
       }
-      console.log(temp_users);
+      console.log("30세 이상인 users", temp_users);
 
-      // 2. 30세 이상인 users의 names를 수집한다.
+      //2. 30세 이상인 users의 names를 수집한다.
       var names = [];
       for (var i = 0; i < temp_users.length; i++) {
         names.push(temp_users[i].name);
       }
-      console.log(names);
+      console.log("30세 이상인 users의 names", names);
 
-      // 3. 30세 미만인 users를 거른다.
+      //3. 30세 미만인 users를 거른다.
       var temp_users = [];
       for (var i = 0; i < users.length; i++) {
         if (users[i].age < 30) {
           temp_users.push(users[i]);
         }
       }
-      console.log(temp_users);
+      console.log("30세 미만인 users", temp_users);
 
-      // 4. 30세 미만인 users의 age를 수집한다.
+      //4. 30세 미만인 usres의 ages를 수집한다.
       var ages = [];
       for (var i = 0; i < temp_users.length; i++) {
         ages.push(temp_users[i].age);
       }
-      console.log(ages);
+      console.log("30세 미만인 users의 ages", names);
+      //
+      //
+      //
+      //
+      //
+      //
 
-      // 2. _filter, _map으로 리팩토링
+      //2. _filter, _map으로 리팩토링
+      /*
+      - if 조건부만 다르고 모든 부분이 중복이 된다.
+      - 원래의 있는 값을 직접 변경하지 않고 변형된 새로운 값을 리턴하는 식으로 값을 변형해 나간다.
+      */
       function _filter(list, predi) {
         var new_list = [];
         for (var i = 0; i < list.length; i++) {
@@ -60,45 +69,51 @@
         }
         return new_list;
       }
+      /* --- End of _filter --- */
 
       function _map(list, mapper) {
         var new_list = [];
-        for (var i = 0; i < temp_users.length; i++) {
+        for (var i = 0; i < list.length; i++) {
           new_list.push(mapper(list[i]));
         }
         return new_list;
       }
+      /* --- End of_map  --- */
 
-      // _map을 위한 변수 선언
       var over_30 = _filter(users, function(user) {
-        // function(user) = predi(users[i])
         return user.age >= 30;
-        //user.age = users[i].age
       });
-      console.log(over_30);
+
+      console.log("30세 이상인 users", over_30);
 
       var names = _map(over_30, function(user) {
-        //function(user) = mapper(list[i])
         return user.name;
       });
-      console.log(names);
+      console.log("30세 이상인 users의 names", names);
 
       var under_30 = _filter(users, function(user) {
         return user.age < 30;
       });
-      console.log(under_30);
+
+      console.log("30세 미만인 users", under_30);
 
       var ages = _map(under_30, function(user) {
         return user.age;
       });
-      console.log(ages);
+      console.log("30세 미만인 users의 ages", ages);
+      //
+      //
+      //
+      //
+      //
+      //
 
+      //대입문 없이 항수를 중첩하는 방식
       console.log(
+        "30세 이상인 users의 names",
         _map(
           _filter(users, function(user) {
-            // function(user) = predi(users[i])
             return user.age >= 30;
-            //user.age = users[i].age
           }),
           function(user) {
             return user.name;
@@ -106,17 +121,29 @@
         )
       );
       console.log(
+        "30세 이상인 users의 ages",
         _map(
           _filter(users, function(user) {
-            // function(user) = predi(users[i])
             return user.age < 30;
-            //user.age = users[i].age
           }),
           function(user) {
             return user.age;
           }
         )
       );
+
+      /* Example
+      console.log(
+        _filter([1, 2, 3, 4], function(num) {
+          return num % 2;
+        })
+      );
+      console.log(
+        _filter([1, 2, 3, 4], function(num) {
+          return !(num % 2);
+        })
+      );
+      */
     </script>
   </body>
 </html>
