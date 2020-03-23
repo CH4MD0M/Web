@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="default.css" />
+    <title>Document</title>
+    <style>
+      .flex-container {
+        display: flex;
+        flex-direction: column;
+      }
+      @media (min-width: 600px) {
+        .flex-container {
+          flex-direction: row;
+        }
+        .flex-item {
+          flex: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div class="flex-item">AAAAAAAAAAA</div>
+      <div class="flex-item">BBBB</div>
+      <div class="flex-item">CCCCCCCC</div>
+    </div>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima optio,
+    deserunt aspernatur consectetur facilis dicta odio, atque ipsam placeat
+    laborum, officia illo perspiciatis non vitae quod iusto molestias? Adipisci,
+    blanditiis!
+  </body>
+</html>
