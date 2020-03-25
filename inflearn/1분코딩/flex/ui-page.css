@@ -1,0 +1,124 @@
+.header {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 0 1rem;
+  height: 80px;
+}
+.search-form {
+  /* justify-content: space-between;
+  와같음(경우에 따라 선택) */
+  width: 300px;
+  margin-left: auto;
+  margin-right: 3rem;
+}
+
+.primary {
+  padding-top: 1rem;
+}
+.secondary {
+  padding: 1rem;
+}
+.secondary-a {
+  background: white;
+}
+.secondary-b {
+  color: white;
+  background: #666;
+}
+.footer {
+  padding: 1rem;
+  text-align: center;
+}
+
+#modal-switch {
+  font-size: 2rem;
+}
+#modal-switch:checked ~ .modal {
+  display: flex;
+}
+#modal-switch:checked ~ label[for="modal-switch"]:before {
+  color: dodgerblue;
+}
+label[for="modal-switch"] {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 1.3rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+}
+label[for="modal-switch"]:before {
+  content: "✉";
+  font-size: 2rem;
+  transition: 0.2s ease-in;
+}
+
+#modal-switch,
+span {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.modal {
+  display: none;
+  top: 80px;
+  animation: modalAnim 0.2s ease-in-out;
+}
+
+@keyframes modalAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.footer {
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid lightgray;
+}
+
+@media (min-width: 1024px) {
+  .page {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .header {
+    width: 100%;
+  }
+  .menu {
+    width: 100%;
+  }
+  .secondary {
+    width: 20%;
+  }
+  .secondary-a {
+    order: 1;
+  }
+  .secondary-b {
+    order: 3;
+  }
+  .primary {
+    width: 60%;
+    order: 2;
+  }
+  footer {
+    order: 4;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .primary {
+    width: calc(100% - 600px);
+  }
+  .secondary {
+    width: 300px;
+  }
+}

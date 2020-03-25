@@ -48,3 +48,106 @@
   font-size: 1rem;
   background: gold;
 }
+
+/* bullet list */
+.info-list__item {
+  display: flex;
+  margin: 0.8em 0;
+}
+.info-list__item:before {
+  /* 가상 element */
+  content: "➽";
+  margin-right: 0.5em;
+}
+
+/* message */
+.user-item {
+  display: flex;
+  margin-bottom: 1.5em;
+  /* em : html의 font-size 기준
+    rem : 해당 태그 내의 font-size 기준;
+  */
+}
+
+.user-photo {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  margin-right: 0.5em;
+  border: 2px solid #333;
+  border-radius: 50%;
+  background-color: gold;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 150%;
+}
+
+/* friend list */
+.friend-item {
+  align-items: center;
+}
+.user-name {
+  /* 외워두기 '말줄임표' */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* modal */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dialog {
+  width: 50vw;
+  padding: 2em;
+  border-radius: 1em;
+  background: white;
+}
+
+/* card-list */
+.card-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+  padding: 0 1em;
+}
+.card-image {
+  height: 0;
+  padding-bottom: 60%;
+  /* 가로세로 비율을 유지하면서 반응형으로 만들기 위함. */
+  background-color: lightgray;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-desc {
+  flex: 1 1 auto;
+  padding: 1em;
+  background: white;
+}
+
+@media (min-width: 600px) {
+  .card-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .card-item {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-item {
+    width: 33.3333%;
+  }
+}
