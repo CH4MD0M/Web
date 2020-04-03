@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS_grid</title>
+    <link rel="stylesheet" href="default.css" />
+    <style>
+      .grid-container {
+        display: grid;
+        /* grid-template-columns: 1fr 2fr 1fr; */
+        /* grid-template-columns: 1fr 500px 1fr; */
+        grid-template-columns: repeat(3, 1fr);
+        /* fr : fraction */
+        /* grid-template-rows: 200px 200px 1fr; */
+        /* 입력한 것 까지만 나머지는 auto 처리됨 */
+        /* grid-template-rows: repeat(3, 1fr); */
+        /* container를  꽉 채워서 적용되기 때문에
+            항상 rows를 설정해주는 것은 아님. */
+        grid-template-rows: repeat(3, minmax(100px, auto));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-item">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum,
+        ducimus.
+      </div>
+      <div class="grid-item">B</div>
+      <div class="grid-item">C</div>
+      <div class="grid-item">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+        repudiandae cupiditate laudantium dolor nobis perspiciatis perferendis
+        incidunt quia!
+      </div>
+      <div class="grid-item">E</div>
+      <div class="grid-item">F</div>
+      <div class="grid-item">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad, corporis
+        eum fugiat placeat veniam alias debitis dolor, voluptatibus
+        necessitatibus reiciendis commodi consequuntur. Suscipit exercitationem
+        nemo sequi aut tempora ipsam voluptatibus!
+      </div>
+      <div class="grid-item">H</div>
+      <div class="grid-item">I</div>
+    </div>
+  </body>
+</html>

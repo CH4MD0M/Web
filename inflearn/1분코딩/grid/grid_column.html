@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Column&Row</title>
+    <link rel="stylesheet" href="default.css" />
+    <style>
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: minmax(100px, auto);
+        gap: 1rem;
+      }
+      .grid-item:nth-child(1) {
+        grid-column: 1/3;
+        grid-row: 1/4;
+      }
+      .grid-item:nth-child(3) {
+        margin-top: 30px;
+        grid-column: 3;
+        grid-row: 2;
+      }
+      .grid-item:nth-child(4) {
+        grid-column: 3;
+        opacity: 0.6;
+        /* 두개를 겹칠때 grid-column을 입력 해줘야 함. */
+        /* 기본적으로 한 칸만 사용하기 때문에 뒤에는 생략 가능 */
+        /* grid-row: 3/5; */
+        grid-row: 2 / span 3;
+        /* 3번 부터 2칸  */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-item">A</div>
+      <div class="grid-item">B</div>
+      <div class="grid-item">C</div>
+      <div class="grid-item">D</div>
+      <div class="grid-item">E</div>
+      <div class="grid-item">F</div>
+      <div class="grid-item">G</div>
+      <div class="grid-item">H</div>
+      <div class="grid-item">I</div>
+    </div>
+  </body>
+</html>

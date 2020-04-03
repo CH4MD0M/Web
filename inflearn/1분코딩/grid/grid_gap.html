@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid_gap</title>
+    <link rel="stylesheet" href="default.css" />
+    <style>
+      .grid-container {
+        display: grid;
+        /* grid-template-columns: repeat(auto-fill, minmax(200px, auto)); */
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, minmax(200px, auto));
+        column-gap: 20px;
+        row-gap: 5px;
+        /* 
+          IE에서는 gap을 지원하지 않음.
+          IE를 지원해야 하는 경우 margin이나 공백용 셀을 만들어야 함.
+        */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-item">A</div>
+      <div class="grid-item">B</div>
+      <div class="grid-item">C</div>
+      <div class="grid-item">D</div>
+      <div class="grid-item">E</div>
+      <div class="grid-item">F</div>
+      <div class="grid-item">G</div>
+      <div class="grid-item">H</div>
+      <div class="grid-item">I</div>
+    </div>
+  </body>
+</html>
