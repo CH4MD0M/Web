@@ -1,0 +1,18 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  // rem의 기본 값
+  font-size: 62.5%;
+  // rem의 기본 값이 16px.
+  // 10 / 16 = 0.625
+  // 62.5%로 설정하여 반응형에 적합한 rem을 수정하기 용이하게 함.
+}
+
+body {
+  box-sizing: border-box;
+}
