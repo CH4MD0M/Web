@@ -29,12 +29,12 @@
 
   &:active {
     transform: translateY(-1px);
-    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    box-shadow: $shadow;
   }
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    box-shadow: $shadow;
     &::after {
       transform: scaleX(1.4) scaleY(1.6);
       opacity: 0;
@@ -46,6 +46,14 @@
     color: $color-grey-dark;
     &::after {
       background-color: $color-white;
+    }
+  }
+
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+    &::after {
+      background-color: $color-primary;
     }
   }
 

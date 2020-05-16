@@ -12,23 +12,26 @@ body {
 .heading-primary {
   color: $color-white;
   text-transform: uppercase;
-  backface-visibility: hidden;
+  backface-visibility: hidden; // animation의 흔들림을 잡기 위해 사용.
   margin-bottom: 6rem;
 
   &--main {
-    display: block;
+    display: block; // span태그는 inline 요소이기 때문에 줄바꿈을 위해서 block처리 한다.
     font-size: 6rem;
     font-weight: 400;
     letter-spacing: 3.5rem; /* 글자간 간격 */
 
+    animation: moveInLeft 1s ease-out;
+    /* ⇕ 같음
     animation-name: moveInLeft;
     animation-duration: 1s;
     animation-timing-function: ease-out;
+    */
 
-    /*
-          animation-delay: 3s;
-          animation-iteration-count: 3;
-          */
+    /* 참고
+    animation-delay: 3s;
+    animation-iteration-count: 3;
+    */
   }
 
   &--sub {
