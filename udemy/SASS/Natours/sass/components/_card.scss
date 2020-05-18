@@ -3,7 +3,7 @@
   position: relative;
   perspective: 150rem;
   -moz-perspective: 150rem;
-  height: 52rem;
+  height: 52rem; // .card와 .card__side(--front,--back)의 높이가 같기 때문에 동일한 갚으로 한다.
 
   &__side {
     position: absolute;
