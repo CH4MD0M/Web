@@ -12,6 +12,10 @@
     border-radius: 10rem;
     transition: all 0.2s;
     font-size: $default-font-size;
+
+    // Change for the <button> element
+    border: none;
+    cursor: pointer;
   }
 
   &::after {
@@ -27,18 +31,21 @@
     transition: all 0.4s;
   }
 
-  &:active {
-    transform: translateY(-1px);
-    box-shadow: $shadow;
-  }
-
   &:hover {
     transform: translateY(-3px);
     box-shadow: $shadow;
+
     &::after {
       transform: scaleX(1.4) scaleY(1.6);
       opacity: 0;
     }
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: $shadow;
   }
 
   &--white {
