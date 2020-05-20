@@ -4,12 +4,12 @@
   }
 
   &__input {
+    font-size: 1.5rem;
     font-family: inherit;
     color: inherit;
-    font-size: 1.5rem;
     padding: 1.5rem 2rem;
     border-radius: 2px;
-    background-color: rgba($color-white, 0.5);
+    background-color: rbga($color-white, 0.5);
     border: none;
     border-bottom: 3px solid transparent;
     width: 90%;
@@ -18,8 +18,8 @@
 
     &:focus {
       outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
       border-bottom: 3px solid $color-primary;
-      box-shadow: $shadow;
     }
 
     &:focus:invalid {
@@ -40,7 +40,7 @@
     transition: all 0.3s;
   }
 
-  &__input:placeholder-shown ~ &__label {
+  &__input:placeholder-shown + &__label {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4rem);
@@ -60,7 +60,7 @@
     font-size: $default-font-size;
     cursor: pointer;
     position: relative;
-    padding-left: 4rem;
+    padding-left: 4.5rem;
   }
 
   &__radio-button {
@@ -68,7 +68,7 @@
     width: 3rem;
     border: 5px solid $color-primary;
     border-radius: 50%;
-    display: block;
+    display: inline-block;
     position: absolute;
     left: 0;
     top: -0.4rem;
@@ -85,12 +85,13 @@
       transform: translate(-50%, -50%);
       background-color: $color-primary;
       opacity: 0;
-      transition: opacity 0.2;
+      transition: opacity 0.2s;
     }
   }
 
   // Radio Button trick
   &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    // radio-input의 직접적인 자식요소가 아니기 때문에 &__radio-label을 넣어준 것.
     opacity: 1;
   }
 }
