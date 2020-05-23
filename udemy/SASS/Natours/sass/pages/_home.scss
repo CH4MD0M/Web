@@ -3,6 +3,11 @@
   margin-top: -20vh;
   // polygon 설정에서 95vh와 75vh의 차이 값인 20vh.
   padding: 25rem 0;
+
+  // TOO MUCH padding
+  @include respond(tab-port) {
+    padding: 20rem 0;
+  }
 }
 
 .section-features {
@@ -19,6 +24,11 @@
   & > * {
     transform: skewY(7deg);
   }
+
+  // TOO MUCH padding
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
 }
 // .section-features * (direct-child : 바로 아래의 자식 요소.)
 
@@ -26,11 +36,21 @@
   background-color: $color-grey-light-1;
   margin-top: -10rem;
   padding: 25rem 0 15rem 0;
+
+  // TOO MUCH padding
+  @include respond(tab-port) {
+    padding: 20rem 0 10rem 0;
+  }
 }
 
 .section-stories {
   padding: 15rem 0;
   position: relative;
+
+  // TOO MUCH padding
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
 }
 
 .section-book {
@@ -40,6 +60,11 @@
     $color-primary-light,
     $color-primary-dark
   );
+
+  // TOO MUCH padding
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
 }
 
 .book {
