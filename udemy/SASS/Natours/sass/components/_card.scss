@@ -1,18 +1,19 @@
-// FUNCTIONALITY
 .card {
+  // FUNCTIONALITY
   position: relative;
   perspective: 150rem;
   -moz-perspective: 150rem;
-  height: 52rem; // .card와 .card__side(--front,--back)의 높이가 같기 때문에 동일한 갚으로 한다.
+  height: 52rem;
+  // .card와 .card__side(--front,--back)의 높이가 같기 때문에 동일한 갚으로 한다.
 
   &__side {
-    position: absolute;
-    font-size: 2rem;
     height: 52rem;
-    transition: all 0.8s ease-in;
+    transition: all 0.8s ease;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 3px;
     overflow: hidden; // image가 parent요소 밖으로 넘치는 것 수정
@@ -67,6 +68,8 @@
     background-blend-mode: screen;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 
     &--1 {
       background-image: linear-gradient(
@@ -135,7 +138,7 @@
     }
   }
   &__details {
-    padding: 3rem;
+    padding: 1rem 3rem;
 
     ul {
       list-style: none;
@@ -164,6 +167,7 @@
   }
 
   &__price-box {
+    text-align: center;
     color: $color-white;
     margin-bottom: 8rem;
   }
@@ -176,5 +180,47 @@
   &__price-value {
     font-size: 6rem;
     font-weight: 100;
+  }
+
+  // ------------ Media Queries ------------
+
+  @include respond(tab-port) {
+    height: auto;
+    // front-side와 back-side의 높이를 갖게 하기 위한 height.
+    border-radius: 3px;
+    background-color: $color-white;
+    box-shadow: $shadow;
+
+    &__side {
+      height: auto;
+      position: relative;
+      box-shadow: none;
+      &--back {
+        transform: rotateY(0);
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+
+    &:hover &__side--front {
+      transform: rotateY(0);
+    }
+
+    // BACK SIDE STYLING
+    &__cta {
+      position: relative;
+      top: 0%;
+      left: 0;
+      transform: translate(0);
+      width: 100%;
+      padding: 7rem 4rem 4rem 4rem;
+    }
+
+    &__price-box {
+      margin-bottom: 3rem;
+    }
+
+    &__price-value {
+      font-size: 4rem;
+    }
   }
 }
