@@ -15,6 +15,17 @@
     box-shadow: $shadow;
     text-align: center;
     cursor: pointer;
+
+    // media-query
+    @include respond(tab-port) {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    @include respond(phone) {
+      top: 3rem;
+      right: 3rem;
+    }
   }
 
   &__background {
@@ -30,6 +41,17 @@
     );
     z-index: 1000;
     transition: transform 0.8s cubic-bezier(0.84, 0.09, 0.22, 0.82);
+
+    // media-query
+    @include respond(tab-port) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+    @include respond(phone) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
   }
 
   &__nav {

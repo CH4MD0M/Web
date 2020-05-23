@@ -6,7 +6,6 @@ body {
   line-height: 1.7;
   /* 사전 정의된 값보다 1.7배 더 큼 */
   color: $color-grey-dark;
-  padding: 3rem;
 }
 
 .heading-primary {
@@ -32,6 +31,10 @@ body {
     animation-delay: 3s;
     animation-iteration-count: 3;
     */
+    @include respond(phone) {
+      letter-spacing: 1rem;
+      font-size: 5rem;
+    }
   }
 
   &--sub {
@@ -40,6 +43,10 @@ body {
     font-weight: 700;
     letter-spacing: 1.7rem;
     animation: moveInRight 1s ease-out;
+
+    @include respond(phone) {
+      letter-spacing: 0.5rem;
+    }
   }
 }
 
@@ -62,6 +69,13 @@ body {
   &:hover {
     transform: skewY(2deg) skewX(15deg) scale(1.1);
     text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2);
+  }
+
+  @include respond(tab-port) {
+    font-size: 3rem;
+  }
+  @include respond(phone) {
+    font-size: 2.5rem;
   }
 }
 

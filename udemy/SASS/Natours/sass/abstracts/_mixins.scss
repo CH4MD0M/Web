@@ -28,7 +28,9 @@ $breakpoint argument choices:
 - tap-land
 - big-desktop
 ================================
-
+** media-query 설정 순서(정해진것은 아님.)
+Base + typhography > general layout + grid > page layout > components
+================================
 1em = 16px
 */
 @mixin respond($breakpoint) {
