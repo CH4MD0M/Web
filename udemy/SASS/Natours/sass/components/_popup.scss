@@ -7,8 +7,12 @@
   background-color: rgba($color-black, 0.8);
   z-index: 9999;
 
+  // 평소 화면에서는 visibility 를 hidden으로 해두고
+  // button 클릭시에 href를 통해서 target이 지정되었을 때
+  // visibility를 visible로 설정한다.
   opacity: 0;
   visibility: hidden;
+
   transition: all 0.3s;
 
   &__content {

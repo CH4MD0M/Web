@@ -266,7 +266,9 @@ body {
       @media only screen and (max-width: 56.25em) {
         .composition__photo--p1 {
           top: 0;
-          transform: scale(1.2); } }
+          transform: scale(1.2); }
+          .composition__photo--p1:hover {
+            transform: translateX(2rem); } }
     .composition__photo--p2 {
       right: 0;
       top: 2rem; }
@@ -288,6 +290,17 @@ body {
       transform: scale(1.1) translateY(-0.5rem);
       box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
       z-index: 20; }
+      @media only screen and (max-width: 56.25em) {
+        .composition__photo:hover {
+          transform: scale(1.4);
+          box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+          z-index: 500; } }
+  @media only screen and (max-width: 56.25em) {
+    .composition:hover .composition__photo:nth-child(1) {
+      transform: scale(1.4) translateX(2rem); } }
+  @media only screen and (max-width: 56.25em) {
+    .composition:hover .composition__photo:nth-child(3) {
+      transform: scale(1.4) translateX(-2rem); } }
   .composition:hover .composition__photo:not(:hover) {
     transform: scale(0.95); }
 
