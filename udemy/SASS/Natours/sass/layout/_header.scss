@@ -18,9 +18,9 @@
     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   }
 
-  @media (min-resolution: 192dpi) and (min-width: 37.5em/* 600px / 16px */),
-    (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em/* 600px / 16px */),
-    /* safari에서 min-resolution을 지원하지 않아서 -webkit-(min/max) -device-pixel-ratio를 사용한다. */ (min-width: 125em/* 2000px / 16px */) {
+  @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em/* 600px / 16px */),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em/* 600px / 16px */),
+    /* safari에서 min-resolution을 지원하지 않아서 -webkit-(min/max) -device-pixel-ratio를 사용한다. */ only screen and (min-width: 125em/* 2000px / 16px */) {
     // dpi: dot per inch;가 높아도 width 600px 밑에서는 hero-small이 출력됨.
     // 작은 화면에서 고해상도의 이미지를 불러오지 않기 위해 and를 사용하여 (min-width: 600px)를 추가한 것.
     background-image: linear-gradient(

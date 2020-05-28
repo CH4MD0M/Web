@@ -56,21 +56,18 @@
 
   &__nav {
     height: 100vh;
-    width: 0;
     position: fixed;
     top: 0;
     right: 0;
     z-index: 1500;
 
+    width: 0;
     opacity: 0;
     transition: all 0.8s cubic-bezier(0.84, 0.09, 0.22, 0.82);
   }
 
   &__list {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @include absCenter;
     list-style: none;
     text-align: center;
     width: 100%;

@@ -184,7 +184,9 @@
 
   // ------------ Media Queries ------------
 
-  @include respond(tab-port) {
+  // @include respond(tab-port) {
+  @media only screen and (max-width: 56.25em /* 900px / 16px */),
+    only screen and (hover: none) {
     height: auto;
     // front-side와 back-side의 높이를 갖게 하기 위한 height.
     border-radius: 3px;

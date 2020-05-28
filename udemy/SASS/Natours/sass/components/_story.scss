@@ -23,7 +23,7 @@
     width: 15rem;
     height: 15rem;
     float: left;
-    transform: translateX(-3rem) skewX(12deg);
+    transform: translateX(-3rem) skewX(12deg); // skew 제거
     position: relative;
     overflow: hidden;
     border-radius: 50%; // firefox에서의 지원을 위한 설정.
