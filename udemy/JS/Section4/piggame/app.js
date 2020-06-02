@@ -9,27 +9,15 @@ GAME RULES:
 
 */
 
-// 48강 첫 번째 DOM 액세스 및 조작
-var scores, roundScore, activePlayer, dice;
-
-scores = [0, 0];
-roundScore = 0;
-activePlayer = 0;
-
-document.querySelector("#current-" + activePlayer).textContent = dice;
-
+//document.querySelector("#current-" + activePlayer).textContent = dice;
 // innerHTML을 사용할 때는 String(문자열)이여야 한다.
 // document.querySelector("#current-" + activePlayer).innerHTML = "<em>" + dice + "</em>";
-
 // var x = document.querySelector("#score-0").textContent;
 // console.log(x);
 
-document.querySelector(".dice").style.display = "none";
-
-document.getElementById("score-0").textContent = "0";
-document.getElementById("score-1").textContent = "0";
-document.getElementById("current-0").textContent = "0";
-document.getElementById("current-1").textContent = "0";
+// 48강 첫 번째 DOM 액세스 및 조작
+var scores, roundScore, activePlayer, dice;
+init(); // 변수 초기화 함수(DRY)
 
 // 49강 : 이벤트 및 미벤트 처리 : 주사위 굴리기
 document.querySelector(".btn-roll").addEventListener("click", function () {
@@ -98,4 +86,31 @@ function nextPlayer() {
 
   document.querySelector(".dice").style.display = "none";
   // activePlayer가 변경되면 dice 이미지를 숨김.
+}
+
+///////////////////////////////////////////
+// btn -NEW
+document.querySelector(".btn-new").addEventListener("click", init);
+
+function init() {
+  scores = [0, 0];
+  activePlayer = 0;
+  roundScore = 0;
+
+  document.querySelector(".dice").style.display = "none";
+
+  document.getElementById("score-0").textContent = "0";
+  document.getElementById("score-1").textContent = "0";
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").textContent = "0";
+
+  document.getElementById("name-0").textContent = "Player 1";
+  document.getElementById("name-1").textContent = "Player 2";
+
+  document.querySelector(".player-0-panel").classList.remove("winner");
+  document.querySelector(".player-1-panel").classList.remove("winner");
+  document.querySelector(".player-0-panel").classList.remove("active");
+  document.querySelector(".player-1-panel").classList.remove("active");
+
+  document.querySelector(".player-0-panel").classList.add("active");
 }
