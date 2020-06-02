@@ -49,20 +49,53 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
     document.querySelector("#current-" + activePlayer).textContent = roundScore;
   } else {
     // Next player
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    roundScore = 0; // roundScore를 0으로 만든다.
-
-    document.getElementById("current-0").textContent = "0";
-    document.getElementById("current-1").textContent = "0"; // 출력되는 current를 0으로 만든다.
-
-    // document.querySelector(".player-0-panel").classList.remove("active");
-    // document.querySelector(".player-1-panel").classList.add("active");
-
-    document.querySelector(".player-0-panel").classList.toggle("active");
-    document.querySelector(".player-1-panel").classList.toggle("active");
-    // active 상태로 전환하여 css 변경
-
-    document.querySelector(".dice").style.display = "none";
-    // activePlayer가 변경되면 dice 이미지를 숨김.
+    nextPlayer();
   }
 });
+
+///////////////////////////////////////////
+// btn-HOLD
+document.querySelector(".btn-hold").addEventListener("click", function () {
+  // Add 'CURRNT score' to 'GLOBAL score'
+  scores[activePlayer] += roundScore;
+
+  // Update the UI
+  document.querySelector("#score-" + activePlayer).textContent =
+    scores[activePlayer];
+
+  // Check if player won the game
+  if (scores[activePlayer] >= 10) {
+    document.querySelector("#name-" + activePlayer).textContent = "Winner!";
+    document.querySelector(".dice").style.display = "none";
+
+    document
+      .querySelector(".player-" + activePlayer + "-panel")
+      .classList.add("winner");
+    document
+      .querySelector(".player-" + activePlayer + "-panel")
+      .classList.remove("active");
+  } else {
+    // Next player
+    nextPlayer();
+  }
+});
+
+///////////////////////////////////////////
+// next_Player
+function nextPlayer() {
+  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+  roundScore = 0; // roundScore를 0으로 만든다.
+
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").textContent = "0"; // 출력되는 current를 0으로 만든다.
+
+  // document.querySelector(".player-0-panel").classList.remove("active");
+  // document.querySelector(".player-1-panel").classList.add("active");
+
+  document.querySelector(".player-0-panel").classList.toggle("active");
+  document.querySelector(".player-1-panel").classList.toggle("active");
+  // active 상태로 전환하여 css 변경
+
+  document.querySelector(".dice").style.display = "none";
+  // activePlayer가 변경되면 dice 이미지를 숨김.
+}
