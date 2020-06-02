@@ -16,55 +16,62 @@ GAME RULES:
 // console.log(x);
 
 // 48강 첫 번째 DOM 액세스 및 조작
-var scores, roundScore, activePlayer, dice;
+var scores, roundScore, activePlayer, gamePlaying;
 init(); // 변수 초기화 함수(DRY)
 
 // 49강 : 이벤트 및 미벤트 처리 : 주사위 굴리기
 document.querySelector(".btn-roll").addEventListener("click", function () {
-  // 1. Random number
-  dice = Math.floor(Math.random() * 6) + 1;
+  if (gamePlaying) {
+    // 1. Random number
+    var dice = Math.floor(Math.random() * 6) + 1;
 
-  // 2. Display the result
-  var diceDOM = document.querySelector(".dice");
-  diceDOM.style.display = "block";
-  diceDOM.src = "dice-" + dice + ".png";
-  // .dice(주사위)를 random()에 맞춰서 이미지를 불러옴.
+    // 2. Display the result
+    var diceDOM = document.querySelector(".dice");
+    diceDOM.style.display = "block";
+    diceDOM.src = "dice-" + dice + ".png";
+    // .dice(주사위)를 random()에 맞춰서 이미지를 불러옴.
 
-  // 3. Update the round score ( IF the rolled number was NOT a 1 )
-  if (dice !== 1) {
-    // Add score
-    roundScore += dice;
-    document.querySelector("#current-" + activePlayer).textContent = roundScore;
-  } else {
-    // Next player
-    nextPlayer();
+    // 3. Update the round score ( IF the rolled number was NOT a 1 )
+    if (dice !== 1) {
+      // Add score
+      roundScore += dice;
+      document.querySelector(
+        "#current-" + activePlayer
+      ).textContent = roundScore;
+    } else {
+      // Next player
+      nextPlayer();
+    }
   }
 });
 
 ///////////////////////////////////////////
 // btn-HOLD
 document.querySelector(".btn-hold").addEventListener("click", function () {
-  // Add 'CURRNT score' to 'GLOBAL score'
-  scores[activePlayer] += roundScore;
+  if (gamePlaying) {
+    // Add 'CURRNT score' to 'GLOBAL score'
+    scores[activePlayer] += roundScore;
 
-  // Update the UI
-  document.querySelector("#score-" + activePlayer).textContent =
-    scores[activePlayer];
+    // Update the UI
+    document.querySelector("#score-" + activePlayer).textContent =
+      scores[activePlayer];
 
-  // Check if player won the game
-  if (scores[activePlayer] >= 10) {
-    document.querySelector("#name-" + activePlayer).textContent = "Winner!";
-    document.querySelector(".dice").style.display = "none";
+    // Check if player won the game
+    if (scores[activePlayer] >= 10) {
+      document.querySelector("#name-" + activePlayer).textContent = "Winner!";
+      document.querySelector(".dice").style.display = "none";
 
-    document
-      .querySelector(".player-" + activePlayer + "-panel")
-      .classList.add("winner");
-    document
-      .querySelector(".player-" + activePlayer + "-panel")
-      .classList.remove("active");
-  } else {
-    // Next player
-    nextPlayer();
+      document
+        .querySelector(".player-" + activePlayer + "-panel")
+        .classList.add("winner");
+      document
+        .querySelector(".player-" + activePlayer + "-panel")
+        .classList.remove("active");
+      gamePlaying = false;
+    } else {
+      // Next player
+      nextPlayer();
+    }
   }
 });
 
@@ -92,10 +99,13 @@ function nextPlayer() {
 // btn -NEW
 document.querySelector(".btn-new").addEventListener("click", init);
 
+///////////////////////////////////////////
+// init
 function init() {
   scores = [0, 0];
   activePlayer = 0;
   roundScore = 0;
+  gamePlaying = true;
 
   document.querySelector(".dice").style.display = "none";
 
