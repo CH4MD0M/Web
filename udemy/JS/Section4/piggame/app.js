@@ -40,6 +40,29 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
   var diceDOM = document.querySelector(".dice");
   diceDOM.style.display = "block";
   diceDOM.src = "dice-" + dice + ".png";
+  // .dice(주사위)를 random()에 맞춰서 이미지를 불러옴.
 
-  // 3. Update the round score IF the rolled number was NOT a 1
+  // 3. Update the round score ( IF the rolled number was NOT a 1 )
+  if (dice !== 1) {
+    // Add score
+    roundScore += dice;
+    document.querySelector("#current-" + activePlayer).textContent = roundScore;
+  } else {
+    // Next player
+    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+    roundScore = 0; // roundScore를 0으로 만든다.
+
+    document.getElementById("current-0").textContent = "0";
+    document.getElementById("current-1").textContent = "0"; // 출력되는 current를 0으로 만든다.
+
+    // document.querySelector(".player-0-panel").classList.remove("active");
+    // document.querySelector(".player-1-panel").classList.add("active");
+
+    document.querySelector(".player-0-panel").classList.toggle("active");
+    document.querySelector(".player-1-panel").classList.toggle("active");
+    // active 상태로 전환하여 css 변경
+
+    document.querySelector(".dice").style.display = "none";
+    // activePlayer가 변경되면 dice 이미지를 숨김.
+  }
 });
