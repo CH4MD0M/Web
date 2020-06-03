@@ -33,7 +33,6 @@ console.log(john.lastName);
 console.log(jane.lastName);
 console.log(mark.lastName);
 
-*/
 ///////////////////////////////////
 // 원시값 vs. 객체
 // 원기값
@@ -45,8 +44,8 @@ console.log(b);
 
 // 객체
 var obj1 = {
-  name: "John",
-  age: 26,
+    name: "John",
+    age: 26,
 };
 var obj2 = obj1;
 obj1.age = 30;
@@ -57,16 +56,56 @@ console.log(obj2.age);
 // 함수
 var age = 27;
 var obj = {
-  name: "dom",
-  city: "incheon",
+    name: "dom",
+    city: "incheon",
 };
 
 function change(a, b) {
-  a = 30;
-  b.city = "Seoul";
+    a = 30;
+    b.city = "Seoul";
 }
 
 change(age, obj);
 
 console.log(age);
 console.log(obj.city);
+*/
+
+///////////////////////////////////
+// 함수를 인수로 전달
+var years = [1990, 1965, 1937, 200, 1998];
+
+function arrayCalc(arr, func) {
+  var arrRes = [];
+  for (var i = 0; i < arr.length; i++) {
+    arrRes.push(func(arr[i]));
+  }
+  return arrRes;
+}
+
+// 콜백 함수(1)
+function calculateAge(ele) {
+  return 2020 - ele;
+}
+
+// 콜백 함수()
+function isFullAge(el) {
+  return el >= 18;
+}
+
+// 콜백 함수(3)
+function maxHeartRate(el) {
+  if (el >= 18 && el <= 81) {
+    return Math.round(206.9 - 0.67 * el);
+  } else {
+    return -1;
+  }
+}
+
+var ages = arrayCalc(years, calculateAge);
+var fullAges = arrayCalc(ages, isFullAge);
+var rates = arrayCalc(ages, maxHeartRate);
+
+console.log(ages);
+console.log(fullAges);
+console.log(rates);
