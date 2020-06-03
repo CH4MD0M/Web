@@ -1,3 +1,4 @@
+/*
 ///////////////////////////////////
 // 생성자 함수
 var john = {
@@ -31,3 +32,41 @@ mark.calculateAge();
 console.log(john.lastName);
 console.log(jane.lastName);
 console.log(mark.lastName);
+
+*/
+///////////////////////////////////
+// 원시값 vs. 객체
+// 원기값
+var a = 23;
+var b = a;
+a = 46;
+console.log(a);
+console.log(b);
+
+// 객체
+var obj1 = {
+  name: "John",
+  age: 26,
+};
+var obj2 = obj1;
+obj1.age = 30;
+
+console.log(obj1.age);
+console.log(obj2.age);
+
+// 함수
+var age = 27;
+var obj = {
+  name: "dom",
+  city: "incheon",
+};
+
+function change(a, b) {
+  a = 30;
+  b.city = "Seoul";
+}
+
+change(age, obj);
+
+console.log(age);
+console.log(obj.city);
