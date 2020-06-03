@@ -69,37 +69,36 @@ change(age, obj);
 
 console.log(age);
 console.log(obj.city);
-*/
 
 ///////////////////////////////////
 // 함수를 인수로 전달
 var years = [1990, 1965, 1937, 200, 1998];
 
 function arrayCalc(arr, func) {
-  var arrRes = [];
-  for (var i = 0; i < arr.length; i++) {
-    arrRes.push(func(arr[i]));
-  }
-  return arrRes;
+    var arrRes = [];
+    for (var i = 0; i < arr.length; i++) {
+        arrRes.push(func(arr[i]));
+    }
+    return arrRes;
 }
 
 // 콜백 함수(1)
 function calculateAge(ele) {
-  return 2020 - ele;
+    return 2020 - ele;
 }
 
 // 콜백 함수()
 function isFullAge(el) {
-  return el >= 18;
+    return el >= 18;
 }
 
 // 콜백 함수(3)
 function maxHeartRate(el) {
-  if (el >= 18 && el <= 81) {
-    return Math.round(206.9 - 0.67 * el);
-  } else {
-    return -1;
-  }
+    if (el >= 18 && el <= 81) {
+        return Math.round(206.9 - 0.67 * el);
+    } else {
+        return -1;
+    }
 }
 
 var ages = arrayCalc(years, calculateAge);
@@ -109,3 +108,30 @@ var rates = arrayCalc(ages, maxHeartRate);
 console.log(ages);
 console.log(fullAges);
 console.log(rates);
+*/
+
+///////////////////////////////////
+// 함수를 반환하는 함수
+function interviewQuestion(job) {
+  if (job === "designer") {
+    return function (name) {
+      console.log(name + ", can you please explain what UX design is?");
+    };
+  } else if (job === "teacher") {
+    return function (name) {
+      console.log("What subject do you teach, " + name + "?");
+    };
+  } else {
+    return function (name) {
+      console.log("Hello " + name + ", what do you do?");
+    };
+  }
+}
+
+var teacherQuestion = interviewQuestion("teacher");
+var designerQuestion = interviewQuestion("designer");
+
+teacherQuestion("John");
+designerQuestion("Jane");
+
+interviewQuestion("designer")("Mark");
