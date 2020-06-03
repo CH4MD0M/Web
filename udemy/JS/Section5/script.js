@@ -108,24 +108,23 @@ var rates = arrayCalc(ages, maxHeartRate);
 console.log(ages);
 console.log(fullAges);
 console.log(rates);
-*/
 
 ///////////////////////////////////
 // 함수를 반환하는 함수
 function interviewQuestion(job) {
-  if (job === "designer") {
-    return function (name) {
-      console.log(name + ", can you please explain what UX design is?");
-    };
-  } else if (job === "teacher") {
-    return function (name) {
-      console.log("What subject do you teach, " + name + "?");
-    };
-  } else {
-    return function (name) {
-      console.log("Hello " + name + ", what do you do?");
-    };
-  }
+    if (job === "designer") {
+        return function (name) {
+            console.log(name + ", can you please explain what UX design is?");
+        };
+    } else if (job === "teacher") {
+        return function (name) {
+            console.log("What subject do you teach, " + name + "?");
+        };
+    } else {
+        return function (name) {
+            console.log("Hello " + name + ", what do you do?");
+        };
+    }
 }
 
 var teacherQuestion = interviewQuestion("teacher");
@@ -135,3 +134,20 @@ teacherQuestion("John");
 designerQuestion("Jane");
 
 interviewQuestion("designer")("Mark");
+*/
+
+///////////////////////////////////
+// 즉시 실행 함수 표현 (IIFE: Immediately Invoked Functions Expressions)
+function game() {
+  var score = Math.random() * 10;
+  console.log(score >= 5);
+}
+game();
+
+// IIFE Function
+var result = (function () {
+  var score = Math.random() * 10;
+  return console.log(score >= 5);
+})();
+
+result;
