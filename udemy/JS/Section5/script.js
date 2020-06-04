@@ -151,7 +151,7 @@ var result = (function () {
 
 result;
 
-*/
+
 
 ///////////////////////////////////
 // 클로저
@@ -202,3 +202,82 @@ function interviewQuestion(job) {
 }
 
 interviewQuestion("teacher")("John");
+*/
+
+///////////////////////////////////
+// Bind, call and apply
+var john = {
+  name: "John",
+  age: 26,
+  job: "teacher",
+  presentation: function (style, timeOfDay) {
+    if (style === "formal") {
+      console.log(
+        "Ladies and geltle man! I'm " +
+          this.name +
+          ", I'm a " +
+          this.job +
+          " and I'm " +
+          this.age +
+          "years old."
+      );
+    } else if (style === "friendly") {
+      console.log(
+        "Hey! what's up? I'm " +
+          this.name +
+          ", I'm a " +
+          this.job +
+          " and I'm " +
+          this.age +
+          " years old. Have a nice " +
+          timeOfDay +
+          "."
+      );
+    }
+  },
+};
+
+var emily = {
+  name: "Emily",
+  age: 35,
+  job: "designer",
+};
+
+john.presentation("formal", "morning");
+
+john.presentation.call(emily, "friendly", "afternoon");
+// john.presentation.apply(emily, ["friendly", "afternoon"]);
+
+var johnFriendly = john.presentation.bind(john, "friendly");
+johnFriendly("morning");
+johnFriendly("night");
+
+var emilyFormal = john.presentation.bind(emily, "formal");
+emilyFormal();
+
+////////////////
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, func) {
+  var arrRes = [];
+  for (var i = 0; i < arr.length; i++) {
+    arrRes.push(func(arr[i]));
+  }
+  return arrRes;
+}
+
+// 콜백 함수(1)
+function calculateAge(ele) {
+  return 2020 - ele;
+}
+
+// 콜백 함수()
+function isFullAge(limit, ele) {
+  return ele >= limit;
+}
+
+var ages = arrayCalc(years, calculateAge);
+var fullKorea = arrayCalc(ages, isFullAge.bind(this, 20));
+
+console.log(ages);
+console.log(fullKorea);
