@@ -72,7 +72,7 @@ console.log(obj.city);
 
 ///////////////////////////////////
 // 함수를 인수로 전달
-var years = [1990, 1965, 1937, 200, 1998];
+var years = [1990, 1965, 1937, 2005, 1998];
 
 function arrayCalc(arr, func) {
     var arrRes = [];
@@ -281,10 +281,9 @@ var fullKorea = arrayCalc(ages, isFullAge.bind(this, 20));
 
 console.log(ages);
 console.log(fullKorea);
-*/
 
 /////////////////////////////
-// CODING CHALLENGE
+// CODING CHALLENGE - 1
 
 (function () {
   // Question 생성자 함수
@@ -343,4 +342,73 @@ console.log(fullKorea);
   // 생성자 함수 Questions의 인스턴스인 q1, q2, q3를 갖는 questions는
   // 프로토타입 체인으로 인해 Questions의 prototype을 __proto__에 의해 접근할 수 있다.
   questions[n].checkAnswer(answer);
+})();
+*/
+
+/////////////////////////////
+// CODING CHALLENGE - 2
+
+(function () {
+  // Question 생성자 함수
+  function Question(question, answers, correct) {
+    this.question = question;
+    this.answers = answers;
+    this.correct = correct;
+  }
+
+  // 질문 display
+  Question.prototype.displayQuestion = function () {
+    console.log(this.question);
+
+    for (var i = 0; i < this.answers.length; i++) {
+      console.log(i + ":" + this.answers[i]);
+    }
+  };
+
+  // 정답 check
+  Question.prototype.checkAnswer = function (ans) {
+    if (ans === this.correct) {
+      console.log("Correct answer!");
+    } else {
+      console.log("Wrong answer. Try again :)");
+    }
+  };
+
+  // 생성자 함수 Questiondml 인스턴스(프로토타입)
+  var q1 = new Question(
+    "Is JavaScript the coolest programming language in the world?",
+    ["Yes", "No"],
+    0
+  );
+
+  var q2 = new Question(
+    "What is the name of this course's teacher?",
+    ["John", "Micheal", "Jonas"],
+    2
+  );
+
+  var q3 = new Question(
+    "What does best describe coding?",
+    ["Boring", "Hard", "Fun", "Tediuos"],
+    2
+  );
+
+  function nextQuestion() {
+    // 질문 출력
+    var questions = [q1, q2, q3];
+    var n = Math.floor(Math.random() * questions.length);
+    questions[n].displayQuestion();
+
+    // promp에서 입력 받은 값을 string -> int 로 형변환.
+    var answer = prompt("Please select the correct answer.");
+
+    if (answer !== "exit") {
+      // 답변 check
+      // 생성자 함수 Questions의 인스턴스인 q1, q2, q3를 갖는 questions는
+      // 프로토타입 체인으로 인해 Questions의 prototype을 __proto__에 의해 접근할 수 있다.
+      questions[n].checkAnswer(parseInt(answer));
+      nextQuestion();
+    }
+  }
+  nextQuestion();
 })();
