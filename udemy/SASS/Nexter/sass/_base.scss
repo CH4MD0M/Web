@@ -31,7 +31,7 @@ body {
   font-family: $font-primary;
   color: $color-grey-dark-2;
   font-weight: 300;
-  line-height: 1.6rem;
+  line-height: 1.6;
 }
 
 .container {
@@ -43,9 +43,4 @@ body {
     [center-end]
     minmax(6rem, 1fr)
     [full-end]; // 14rem = 1140px / 8 columns
-
-  & > * {
-    padding: 40px;
-    font-size: 3rem;
-  }
 }
