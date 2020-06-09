@@ -1,6 +1,41 @@
 // BUDGET CONTROLLER
 var budgetController = (function () {
-  // Some code
+  var Expense = function (id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+
+  var Income = function (id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+
+  // data의 갯수가 많아지면 개체를 data갯수만큼 만드는 것은 비효율적.
+  // --> 배열에 저장함.
+
+  /*
+  var allExpenses = [];
+  var allIncomes = [];
+  var totalExpenses = 0;
+  */
+
+  // 입력 받는 값을 하나의 배열에 저장하는 것보다
+  // 입력 받는 값을 저장하는 배열을 따로 분리하는 것이 효율적.
+
+  var data = {
+    allItems: {
+      exp: [],
+      inc: [],
+    },
+
+    // allItems에 data를 저장하고 그 값으로 totals를 계산하여 배열에 저장.(200609 예상)
+    totals: {
+      exp: 0,
+      inc: 0,
+    },
+  };
 })();
 
 // UI CONTROLLER
