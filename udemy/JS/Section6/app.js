@@ -21,6 +21,20 @@ var budgetController = (function () {
   var totalExpenses = 0;
   */
 
+  var calculateTotal = function (type) {
+    var sum = 0;
+    data.allItems[type].forEach(function (cur) {
+      sum += cur.value;
+    });
+    /*
+    0
+    ex) [200, 400, 100]
+    sum = 0 + 200
+    sum = 200 + 600
+    sum = 600 + 100 = 700
+     */
+    data.totals[type] = sum;
+  };
   // 입력 받는 값을 하나의 배열에 저장하는 것보다
   // 입력 받는 값을 저장하는 배열을 따로 분리하는 것이 효율적.
 
@@ -30,11 +44,17 @@ var budgetController = (function () {
       inc: [],
     },
 
-    // allItems에 data를 저장하고 그 값으로 totals를 계산하여 배열에 저장.(200609 예상)
+    // allItems에 값을 저장하고 그 값으로 totals를 계산하여 배열에 저장.(200609 예상)
     totals: {
       exp: 0,
       inc: 0,
     },
+
+    // income - expenses 값을 저장하기 위한 변수.
+    budget: 0,
+
+    // %(백분율)을 저장히기 위한 변수
+    percentage: -1,
   };
 
   return {
@@ -60,6 +80,33 @@ var budgetController = (function () {
 
       // Return the new element
       return newItem;
+    },
+
+    culculateBudget: function () {
+      // calculate total income and expenses
+      calculateTotal("exp");
+      calculateTotal("inc");
+
+      // calculate the budget: income -  expenses
+      data.budget = data.totals.inc - data.totals.exp;
+
+      // calculate percentage of income that we spent
+      if (data.totals.exp > 0) {
+        data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
+      } else {
+        data.percentage = -1;
+      }
+    },
+
+    getBudget: function () {
+      // totals:inc, totals:exp,  budget(inc-exp), percentage
+      // 4개를 return하기 위해서 Object(객체)로 return한다.
+      return {
+        totalInc: data.totals.inc,
+        totalExp: data.totals.exp,
+        budget: data.budget,
+        percentage: data.percentage,
+      };
     },
 
     testing: function () {
@@ -152,8 +199,13 @@ var controller = (function (budgetCtrl, UICtrl) {
 
   var updateBudget = function () {
     // 1. Calculate the budget
+    budgetCtrl.culculateBudget();
+
     // 2. Return the budget
+    var budget = budgetCtrl.getBudget();
+
     // 3. Display the budget on the UI
+    console.log(budget);
   };
 
   var ctrlAddItem = function () {
