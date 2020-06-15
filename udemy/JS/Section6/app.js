@@ -4,6 +4,20 @@ var budgetController = (function () {
     this.id = id;
     this.description = description;
     this.value = value;
+    this.percentage = -1;
+  };
+
+  Expense.prototype.calcPercentage = function (totalIncome) {
+    if (totalIncome > 0) {
+      // 수입(ioncome)이 있을때만 계산
+      this.percentage = Math.round((this.value / totalIncome) * 100);
+    } else {
+      this.percentage = -1;
+    }
+  };
+
+  Expense.prototype.getPercentage = function () {
+    return this.percentage;
   };
 
   var Income = function (id, description, value) {
@@ -108,6 +122,7 @@ var budgetController = (function () {
 
       // calculate percentage of income that we spent
       if (data.totals.inc > 0) {
+        // 수입(ioncome)이 있을때만 계산
         data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
       } else {
         data.percentage = -1;
@@ -123,6 +138,19 @@ var budgetController = (function () {
         budget: data.budget,
         percentage: data.percentage,
       };
+    },
+
+    calculatePercentages: function () {
+      data.allItems.exp.forEach(function (cur) {
+        cur.calcPercentage(data.totals.inc);
+      });
+    },
+
+    getPercentages: function () {
+      var allPerc = data.allItems.exp.map(function (cur) {
+        return cur.getPercentage();
+      });
+      return allPerc;
     },
 
     testing: function () {
@@ -263,8 +291,13 @@ var controller = (function (budgetCtrl, UICtrl) {
   // PERCENTAGE
   var updatePercentage = function () {
     // 1. Calculate percantages
+    budgetCtrl.calculatePercentages();
+
     // 2. Read percentage from the budget copntroller
+    var percentages = budgetCtrl.getPercentages();
+
     // 3. Update the UI with the new percentage
+    console.log(percentages);
   };
 
   // ///////////////////////////
