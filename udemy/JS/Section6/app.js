@@ -97,6 +97,7 @@ var budgetController = (function () {
       }
     },
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     culculateBudget: function () {
       // calculate total income and expenses
       calculateTotal("exp");
@@ -222,13 +223,17 @@ var UIController = (function () {
 
 // GLOBAL APP CONTROLLER
 var controller = (function (budgetCtrl, UICtrl) {
+  // ///////////////////////////
+  // STEUP EVENT
   var setupEventListeners = function () {
     var DOM = UICtrl.getDOMstrings();
 
+    // 1. 버튼을 클릭했을 때
     document
       .querySelector(DOM.inputButton) // 외부에서 호출하므로 DOMstrings가 아닌 변수 DOM
       .addEventListener("click", ctrlAddItem);
 
+    // 2. enter 키를 눌렀을때
     document.addEventListener("keypress", function (event) {
       if (event.keyCode === 13 || event.which === 13) {
         ctrlAddItem();
@@ -240,6 +245,8 @@ var controller = (function (budgetCtrl, UICtrl) {
       .addEventListener("click", ctrlDeleteItem);
   };
 
+  // ///////////////////////////
+  // UPDATE BUDGET
   var updateBudget = function () {
     // 1. Calculate the budget
     budgetCtrl.culculateBudget();
@@ -252,6 +259,16 @@ var controller = (function (budgetCtrl, UICtrl) {
     UICtrl.displayBudget(budget);
   };
 
+  // ///////////////////////////
+  // PERCENTAGE
+  var updatePercentage = function () {
+    // 1. Calculate percantages
+    // 2. Read percentage from the budget copntroller
+    // 3. Update the UI with the new percentage
+  };
+
+  // ///////////////////////////
+  // ADD ITEM
   var ctrlAddItem = function () {
     var input, newItem;
     // 1. Get the field input data
@@ -269,6 +286,9 @@ var controller = (function (budgetCtrl, UICtrl) {
 
       // 5. Claculate and update budget
       updateBudget();
+
+      // 6. Calculate and update percentage
+      updatePercentage();
     } else {
       alert(
         "Please check the decription, value! \n (Do not leave it blank OR 0)"
@@ -276,6 +296,8 @@ var controller = (function (budgetCtrl, UICtrl) {
     }
   };
 
+  // ///////////////////////////
+  // DELETE ITEM
   var ctrlDeleteItem = function (event) {
     var itemID, splitID, type, ID;
 
@@ -294,9 +316,14 @@ var controller = (function (budgetCtrl, UICtrl) {
 
       // 3. Update and show the new budget
       updateBudget();
+
+      // 4. Calculate and update percentage
+      updatePercentage();
     }
   };
 
+  // ///////////////////////////
+  // RETURN
   return {
     init: function () {
       console.log("Application has started.");
