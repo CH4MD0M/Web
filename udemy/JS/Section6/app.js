@@ -174,6 +174,7 @@ var UIController = (function () {
     percentageLabel: ".budget__expenses--percentage",
     container: ".container",
     expensesPercLabel: ".item__percentage",
+    dateLabel: ".budget__title--month",
   };
 
   var formatNumber = function (num, type) {
@@ -314,6 +315,35 @@ var UIController = (function () {
       });
     },
 
+    // MONTH 출력
+    displayMonth: function () {
+      var now, months, month, year;
+
+      now = new Date();
+
+      months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      month = now.getMonth();
+
+      year = now.getFullYear();
+
+      document.querySelector(DOMstrings.dateLabel).style.color = "orangered";
+      document.querySelector(DOMstrings.dateLabel).textContent =
+        months[month] + " " + year;
+    },
+
     getDOMstrings: function () {
       return DOMstrings;
       // 함수 외부에서 DOMstrings를 접근할 수 없기 때문에,
@@ -433,13 +463,13 @@ var controller = (function (budgetCtrl, UICtrl) {
   return {
     init: function () {
       console.log("Application has started.");
+      UICtrl.displayMonth();
       UICtrl.displayBudget({
         totalInc: 0,
         totalExp: 0,
         budget: 0,
         percentage: 0,
       });
-      UICtrl.formatNumber;
       setupEventListeners();
     },
   };
