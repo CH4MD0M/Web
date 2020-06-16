@@ -212,6 +212,12 @@ var UIController = (function () {
     // dec = numSplit[1]; // 소수점 부분
   };
 
+  var nodeListForEach = function (list, callback) {
+    for (var i = 0; i < list.length; i++) {
+      callback(list[i], i);
+    }
+  };
+
   return {
     getinput: function () {
       return {
@@ -299,12 +305,6 @@ var UIController = (function () {
     displayPercentages: function (percentages) {
       var fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
 
-      var nodeListForEach = function (list, callback) {
-        for (var i = 0; i < list.length; i++) {
-          callback(list[i], i);
-        }
-      };
-
       // 콜백함수
       nodeListForEach(fields, function (current, index) {
         if (percentages[index] > 0) {
@@ -344,6 +344,22 @@ var UIController = (function () {
         months[month] + " " + year;
     },
 
+    changedType: function () {
+      var fields = document.querySelectorAll(
+        DOMstrings.inputType +
+          "," +
+          DOMstrings.inputDescription +
+          "," +
+          DOMstrings.inputValue
+      );
+
+      nodeListForEach(fields, function (cur) {
+        cur.classList.toggle("red-focus");
+      });
+
+      document.querySelector(DOMstrings.inputButton).classList.toggle("red");
+    },
+
     getDOMstrings: function () {
       return DOMstrings;
       // 함수 외부에서 DOMstrings를 접근할 수 없기 때문에,
@@ -374,6 +390,11 @@ var controller = (function (budgetCtrl, UICtrl) {
     document
       .querySelector(DOM.container)
       .addEventListener("click", ctrlDeleteItem);
+
+    // type이 '-'일 때 색상 변경.
+    document
+      .querySelector(DOM.inputType)
+      .addEventListener("change", UICtrl.changedType);
   };
 
   // ///////////////////////////
