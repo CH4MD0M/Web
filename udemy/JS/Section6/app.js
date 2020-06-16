@@ -176,6 +176,41 @@ var UIController = (function () {
     expensesPercLabel: ".item__percentage",
   };
 
+  var formatNumber = function (num, type) {
+    /*
+    + 또는 - (before number)
+    소수점 2번째 자리까지 표시
+    천의 자리마다 ,(comma) 표시
+
+    ex) 
+    2310.4567 -> + 2,310.46
+    2000 -> + 2,000.00
+     */
+
+    var numSplit, int, dec;
+
+    //num = Math.abs(num); // num을 절대값으로 만듦.
+    num = num.toFixed(2);
+    // 소수점 두번째 자리에서 반올림
+    // toFixed는 문자열로 return 한다.
+
+    num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    return (type === "exp" ? "-" : "+") + " " + num;
+
+    // numSplit = num.split("."); // .(점)을 기준으로 정수와 소수점으로 구분한다.
+
+    // int = numSplit[0]; // 정수부분
+    // if (int.length > 3) {
+    //   int =
+    //     int.substr(0, int.lenght - 3) +
+    //     "," +
+    //     int.substr(int.lenght - 3, int.length); // input 2310, output 2,310
+    // }
+
+    // dec = numSplit[1]; // 소수점 부분
+  };
+
   return {
     getinput: function () {
       return {
@@ -185,6 +220,7 @@ var UIController = (function () {
       };
     },
 
+    // 각 항목의 값을 받아와서 (HTML코드를 추가하여) 출력
     addListItem: function (obj, type) {
       var html, newHtml, element;
 
@@ -202,7 +238,7 @@ var UIController = (function () {
       // Replace the placeholder text with some actual data
       newHtml = html.replace("%id%", obj.id);
       newHtml = newHtml.replace("%description%", obj.description);
-      newHtml = newHtml.replace("%value%", obj.value);
+      newHtml = newHtml.replace("%value%", formatNumber(obj.value, type));
 
       // Insert the HTML into the DOM
       document.querySelector(element).insertAdjacentHTML("beforeend", newHtml);
@@ -211,6 +247,9 @@ var UIController = (function () {
     deleteListItem: function (selectorID) {
       var el = document.getElementById(selectorID);
       el.parentNode.removeChild(el);
+      // JavaScript에서는 요소를 바로 삭제가 불가능하다. => 자식요소만 삭제 가능하다.
+      // <div class="item clearfix" id="income-0">를 삭제 하기 위해서는
+      // 이것의 부모 노드에서 삭제해야 삭제를 시킬 수 있다.
     },
 
     clearFields: function () {
@@ -228,11 +267,24 @@ var UIController = (function () {
       fieldsArr[0].focus();
     },
 
+    // Budget에서의 백분율
     displayBudget: function (obj) {
-      document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
-      document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
-      document.querySelector(DOMstrings.expensesLabel).textContent =
-        obj.totalExp;
+      var type;
+      obj.budget > 0 ? (type = "inc") : (type = "exp");
+
+      document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(
+        obj.budget,
+        type
+      );
+
+      document.querySelector(DOMstrings.incomeLabel).textContent = formatNumber(
+        obj.totalInc,
+        "inc"
+      );
+
+      document.querySelector(
+        DOMstrings.expensesLabel
+      ).textContent = formatNumber(obj.totalExp, "exp");
 
       if (obj.percentage > 0) {
         document.querySelector(DOMstrings.percentageLabel).textContent =
@@ -242,6 +294,7 @@ var UIController = (function () {
       }
     },
 
+    // 각 항목에서의 백분율
     displayPercentages: function (percentages) {
       var fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
 
@@ -386,6 +439,7 @@ var controller = (function (budgetCtrl, UICtrl) {
         budget: 0,
         percentage: 0,
       });
+      UICtrl.formatNumber;
       setupEventListeners();
     },
   };
