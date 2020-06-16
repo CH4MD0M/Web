@@ -173,6 +173,7 @@ var UIController = (function () {
     expensesLabel: ".budget__expenses--value",
     percentageLabel: ".budget__expenses--percentage",
     container: ".container",
+    expensesPercLabel: ".item__percentage",
   };
 
   return {
@@ -241,6 +242,25 @@ var UIController = (function () {
       }
     },
 
+    displayPercentages: function (percentages) {
+      var fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
+
+      var nodeListForEach = function (list, callback) {
+        for (var i = 0; i < list.length; i++) {
+          callback(list[i], i);
+        }
+      };
+
+      // 콜백함수
+      nodeListForEach(fields, function (current, index) {
+        if (percentages[index] > 0) {
+          current.textContent = percentages[index] + "%";
+        } else {
+          current.textContent = "---";
+        }
+      });
+    },
+
     getDOMstrings: function () {
       return DOMstrings;
       // 함수 외부에서 DOMstrings를 접근할 수 없기 때문에,
@@ -290,14 +310,14 @@ var controller = (function (budgetCtrl, UICtrl) {
   // ///////////////////////////
   // PERCENTAGE
   var updatePercentage = function () {
-    // 1. Calculate percantages
+    // 1. Calculate percentages
     budgetCtrl.calculatePercentages();
 
     // 2. Read percentage from the budget copntroller
     var percentages = budgetCtrl.getPercentages();
 
     // 3. Update the UI with the new percentage
-    console.log(percentages);
+    UICtrl.displayPercentages(percentages);
   };
 
   // ///////////////////////////
