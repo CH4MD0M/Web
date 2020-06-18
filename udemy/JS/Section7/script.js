@@ -1,5 +1,6 @@
 /*
-// Lecture : let and const
+/////////////////////////////////////////////
+// Lecture 104: let and const
 
 //ES5
 var name5 = "Jane Smith";
@@ -71,8 +72,9 @@ for (var i = 0; i < 5; i++) {
 
 console.log(i);
 
+
 /////////////////////////////////////////////
-// Lecture: Blocks and IIFEs
+// Lecture 105: Blocks and IIFEs
 
 // ES6
 {
@@ -90,22 +92,21 @@ console.log(c);
 
 // console.log(c);
 
-*/
 
 /////////////////////////////////////////////
-// Lecture: Strings
+// Lecture 106: Strings
 
 let firstName = "John";
 let lastName = "Smith";
 const yearOfBirth = 1990;
 
 function clacAge(year) {
-  return 2020 - year;
+    return 2020 - year;
 }
 
 // ES5
 console.log(
-  "This is " +
+    "This is " +
     firstName +
     " " +
     lastName +
@@ -114,18 +115,49 @@ console.log(
     ". Today, he is " +
     clacAge(yearOfBirth) +
     " years old."
-);
+    );
+    
+    // ES6
+    console.log(
+        `This is ${firstName} ${lastName}. He was born in ${yearOfBirth}. Today, he is ${clacAge(
+            yearOfBirth
+            )} years old. `
+            );
+            
+            const n = `${firstName} ${lastName}`;
+            console.log(n.startsWith("J"));
+            console.log(n.endsWith("th"));
+            console.log(n.includes(" "));
+            console.log(firstName.repeat(5));
+            console.log(`${firstName} `.repeat(5));
+            
+*/
+
+/////////////////////////////////////////////
+// Lecture 107: Arrow funcrtions
+const years = [1990, 1965, 1982, 1937];
+
+// ES5
+var ages5 = years.map(function (el) {
+  return 2020 - el;
+});
+
+console.log(ages5);
 
 // ES6
-console.log(
-  `This is ${firstName} ${lastName}. He was born in ${yearOfBirth}. Today, he is ${clacAge(
-    yearOfBirth
-  )} years old. `
-);
+// const ages6 = years.map((el) => 2020 - el);
 
-const n = `${firstName} ${lastName}`;
-console.log(n.startsWith("J"));
-console.log(n.endsWith("th"));
-console.log(n.includes(" "));
-console.log(firstName.repeat(5));
-console.log(`${firstName} `.repeat(5));
+let ages6 = years.map((el) => 2020 - el);
+// 밑의 예제를 위해 let으로 변경.
+console.log(ages6);
+
+ages6 = years.map((el, index) => `Age element ${index + 1}: ${2020 - el}`);
+console.log(ages6);
+
+ages6 = years.map((el, index) => {
+  const now = new Date().getFullYear();
+  const age = now - el;
+  return `Age element ${index + 1}: ${age}`;
+});
+
+console.log(ages6);
