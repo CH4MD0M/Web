@@ -1,13 +1,13 @@
 /*
 // Lecture : let and const
 
-//ES 5
+//ES5
 var name5 = "Jane Smith";
 var age5 = 23;
 name5 = "Jane Miller";
 console.log(name5);
 
-// ES 6
+// ES6
 // const 는 변경하고 싶지 않은 변수
 const name6 = "Jane Smith";
 let age = 23;
@@ -17,7 +17,7 @@ console.log(name6);
 
 
 
-// ES 5
+// ES5
 function driverLicense5(passedTest) {
   if (passedTest) {
     console.log(firstNmae); // undefined
@@ -35,7 +35,7 @@ function driverLicense5(passedTest) {
 
 driverLicense5(true);
 
-// ES 6
+// ES6
 function driverLicense6(passedTest) {
   // console.log(firstNmae); // ReferenceError.
 
@@ -74,3 +74,19 @@ console.log(i);
 
 /////////////////////////////////////////////
 // Lecture: Blocks and IIFEs
+
+// ES6
+{
+  const a = 1;
+  let b = 2;
+  var c = 3;
+}
+// console.log(a + b);
+console.log(c);
+
+// ES5
+(function () {
+  var c = 3;
+})();
+
+// console.log(c);
