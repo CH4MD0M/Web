@@ -164,7 +164,7 @@ console.log(ages6);
 
 
 /////////////////////////////////////////////
-// Lecture 107: Arrow funcrtions 2
+// Lecture 108: Arrow funcrtions 2
 
 // ES5
 var box5 = {
@@ -239,10 +239,10 @@ Person.prototype.myFriends6 = function (friends) {
 };
 
 new Person("Mike").myFriends6(friends);
-*/
+
 
 /////////////////////////////////////////////
-// Destructuring
+// Lecture 109: Destructuring
 
 // ES5
 var john = ["John", 26];
@@ -275,3 +275,55 @@ function clacAgeRetirement(year) {
 const [age2, retirement] = clacAgeRetirement(1990);
 console.log(age2);
 console.log(retirement);
+*/
+
+/////////////////////////////////////////////
+// Lecture 110: Arrays
+const boxes = document.querySelectorAll(".box");
+
+// ES5
+var boxesArr5 = Array.prototype.slice.call(boxes);
+boxesArr5.forEach(function (cur) {
+  cur.style.backgroundColor = "dodgerblue";
+});
+
+// ES6
+const boxesArr6 = Array.from(boxes);
+Array.from(boxes).forEach((cur) => (cur.style.backgroundColor = "orangered"));
+
+/////////////////////////////////////////////
+
+// ES5
+for (var i = 0; i < boxesArr5.length; i++) {
+  if (boxesArr5[i].className === "box orange") {
+    break;
+    // continue;
+  }
+  boxesArr5[i].textContent = "I changed to Orange!";
+}
+
+// ES6
+for (const cur of boxesArr6) {
+  if (cur.className.includes("orange")) {
+    continue;
+  }
+  cur.textContent = "I changed to Orange!";
+}
+
+/////////////////////////////////////////////
+
+// ES5
+var ages = [12, 17, 8, 21, 14, 11];
+
+var full = ages.map(function (cur) {
+  return cur >= 18;
+});
+
+console.log(full);
+
+console.log(full.indexOf(true)); // true인 index를 출력: 3
+console.log(ages[full.indexOf(true)]); // ages[3]
+
+// ES6
+console.log(ages.findIndex((cur) => cur >= 18));
+console.log(ages.find((cur) => cur >= 18));
