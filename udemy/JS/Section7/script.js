@@ -275,7 +275,7 @@ function clacAgeRetirement(year) {
 const [age2, retirement] = clacAgeRetirement(1990);
 console.log(age2);
 console.log(retirement);
-*/
+
 
 /////////////////////////////////////////////
 // Lecture 110: Arrays
@@ -327,3 +327,40 @@ console.log(ages[full.indexOf(true)]); // ages[3]
 // ES6
 console.log(ages.findIndex((cur) => cur >= 18));
 console.log(ages.find((cur) => cur >= 18));
+*/
+
+/////////////////////////////////////////////
+// Lecture 111: Spread operator
+function addFourAges(a, b, c, d) {
+  return a + b + c + d;
+}
+
+var sum1 = addFourAges(18, 30, 12, 21);
+console.log(sum1);
+
+// ES5
+// apply 메서드는 배열로 인자를 넣는다.
+var ages = [18, 30, 12, 21];
+var sum2 = addFourAges.apply(null, ages);
+
+console.log(sum2);
+
+// ES6
+// 배열을 불러오는 것이 가능.
+const sum3 = addFourAges(...ages);
+console.log(sum3);
+
+/////////////////////////////////////////////
+// 배열을 합치는 것이 가능. (join)
+const familySmith = ["Jhon", "Jane", "Mark"];
+const familyMiler = ["Miler", "Bob", "Ann"];
+const bigFamily = [...familySmith, "Lily", ...familyMiler];
+// spread 연산자 중간에 배열 요소를 추가하는 것이 가능.
+console.log(bigFamily);
+
+/////////////////////////////////////////////
+// spread 연산자는 배열뿐 아니라 nodeList에서도 사용이 가능.
+const h = document.querySelector("h1");
+const boxes = document.querySelectorAll(".box");
+const all = [h, ...boxes];
+Array.from(all).forEach((cur) => (cur.style.color = "purple"));
