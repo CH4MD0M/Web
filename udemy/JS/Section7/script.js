@@ -327,7 +327,7 @@ console.log(ages[full.indexOf(true)]); // ages[3]
 // ES6
 console.log(ages.findIndex((cur) => cur >= 18));
 console.log(ages.find((cur) => cur >= 18));
-*/
+
 
 /////////////////////////////////////////////
 // Lecture 111: Spread operator
@@ -364,3 +364,43 @@ const h = document.querySelector("h1");
 const boxes = document.querySelectorAll(".box");
 const all = [h, ...boxes];
 Array.from(all).forEach((cur) => (cur.style.color = "purple"));
+*/
+
+/////////////////////////////////////////////
+// Lecture 112: Rest parameters
+
+// ES5
+function isFullAge5() {
+  // console.log(arguments);
+  var argsArr = Array.prototype.slice.call(arguments);
+  argsArr.forEach(function (cur) {
+    console.log(2016 - cur >= 18);
+  });
+}
+// isFullAge5(1990, 1999, 1965);
+// isFullAge5(1990, 1999, 1965, 2016, 1987);
+
+// ES6
+function isFullAge6(...years) {
+  years.forEach((cur) => console.log(2016 - cur >= 18));
+}
+// isFullAge6(1990, 1999, 1965);
+
+/////////////////////////////////////////////
+
+// ES5
+function isFullAge5(limit) {
+  var argsArr = Array.prototype.slice.call(arguments, 1);
+  // slice 메서드를 사용하여 배열의 1번 index를 출력하지 않고 limit인자로 사용.
+
+  argsArr.forEach(function (cur) {
+    console.log(2016 - cur >= limit);
+  });
+}
+isFullAge5(21, 1990, 1999, 1965);
+
+// ES6
+function isFullAge6(limit, ...years) {
+  years.forEach((cur) => console.log(2016 - cur >= limit));
+}
+isFullAge6(19, 1990, 1999, 1965);
