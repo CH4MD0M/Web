@@ -364,7 +364,6 @@ const h = document.querySelector("h1");
 const boxes = document.querySelectorAll(".box");
 const all = [h, ...boxes];
 Array.from(all).forEach((cur) => (cur.style.color = "purple"));
-*/
 
 /////////////////////////////////////////////
 // Lecture 112: Rest parameters
@@ -392,7 +391,7 @@ function isFullAge6(...years) {
 function isFullAge5(limit) {
   var argsArr = Array.prototype.slice.call(arguments, 1);
   // slice 메서드를 사용하여 배열의 1번 index를 출력하지 않고 limit인자로 사용.
-
+  
   argsArr.forEach(function (cur) {
     console.log(2016 - cur >= limit);
   });
@@ -404,3 +403,39 @@ function isFullAge6(limit, ...years) {
   years.forEach((cur) => console.log(2016 - cur >= limit));
 }
 isFullAge6(19, 1990, 1999, 1965);
+*/
+
+/////////////////////////////////////////////
+// Lecture 113: Default parameters
+
+// ES5
+function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+  // 기본값 설정.
+  lastName === undefined ? (lastName = "Smith") : (lastName = lastName);
+
+  nationality === undefined
+    ? (nationality = "american")
+    : (nationality = nationality);
+
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.yearOfBirth = yearOfBirth;
+  this.nationality = nationality;
+}
+
+// ES6
+function SmithPerson(
+  firstNmae,
+  yearOfBirth,
+  lastName = "Smith",
+  nationality = "american"
+) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.yearOfBirth = yearOfBirth;
+  this.nationality = nationality;
+}
+
+var john = new SmithPerson("John", 1990);
+var emily = new SmithPerson("Emily", 1983, "DIaz", "spnish");
+// 기본 값 설정에 오버라이딩됨.
