@@ -525,7 +525,7 @@ class Person6 {
 const john6 = new Person6("John", 1990, "teacher");
 
 Person6.greeting();
-*/
+
 
 /////////////////////////////////////////////
 // Lecture 116: Classes and subclasses
@@ -596,3 +596,128 @@ class Athelete6 extends Person6 {
 const johnAthelete6 = new Athelete6("John", 1990, "swimmer", 3, 10);
 johnAthelete6.calculateAge();
 johnAthelete6.wonMedal();
+*/
+
+/////////////////////////////////
+// CODING CHALLENGE
+
+/*
+
+작은 마을 행정에서 일하고 있고, 두 개의 마을 요소를 담당하고 있다고 가정해 보자.
+1. Parks
+2. Streets
+
+아주 작은 마을이라 지금은 공원 3개와 거리 4개밖에 없다. 모든 공원과 거리는 이름과 건축년도를 가지고 있다.
+
+연말 회의에서 상사는 다음과 같은 최종 보고서를 원한다.
+1. Tree density of each park in the town (forumla: number of trees/park area)
+2. Average age of each town's park (forumla: sum of all ages/number of parks)
+3. The name of the park that has more than 1000 trees
+4. Total and average length of the town's streets
+5. Size classification of all streets: tiny/small/normal/big/huge. If the size is unknown, the default is normal
+
+모든 보고서 데이터는 콘솔에 출력해야 한다.
+
+HINT: Use some of the ES6 features: classes, subclasses, template strings, default parameters, maps, arrow functions, destructuring, etc.
+*/
+
+class Element {
+  constructor(name, buildYear) {
+    this.name = name;
+    this.buildYear = buildYear;
+  }
+}
+
+class Park extends Element {
+  constructor(name, buildYear, area, numTrees) {
+    super(name, buildYear);
+    this.area = area;
+    this.numTrees = numTrees;
+  }
+
+  treeDensity() {
+    const density = parseInt(this.numTrees / this.area);
+    console.log(
+      `${this.name} 는 평방 킬로미터당 ${density}그루의 나무 밀도를 가지고 있다.`
+    );
+  }
+}
+
+class Street extends Element {
+  constructor(name, buildYear, length, size = 3) {
+    super(name, buildYear);
+    this.length = length;
+    this.size = size;
+  }
+
+  classifyStreet() {
+    const classification = new Map();
+    classification.set(1, "매우작은");
+    classification.set(2, "작은");
+    classification.set(3, "보통크기의");
+    classification.set(4, "큰");
+    classification.set(5, "매우 큰");
+
+    console.log(
+      `${this.name}는 ${this.buildYear}년도에 지어졌고, ${classification.get(
+        this.size
+      )} 거리이다.`
+    );
+  }
+}
+
+const allParks = [
+  new Park("Red Park", 1990, 2, 200),
+  new Park("Blue Park", 2000, 4, 450),
+  new Park("Green Park", 1980, 1, 1500),
+];
+
+const allStreets = [
+  new Street("NewYork Street", 2001, 1, 5),
+  new Street("4th Street", 1999, 3, 4),
+  new Street("Ocean Street", 2004, 3, 1),
+  new Street("Sunset Avenue", 2015, 3, 2),
+];
+
+// CALCULATE TOTAL & Avg.
+function calc(arr) {
+  const sum = arr.reduce((prev, cur, index) => prev + cur, 0);
+  return [sum, sum / arr.length];
+}
+
+// REPORT PARKS
+function reportParks(p) {
+  console.log("-----PARKS REPORT-----");
+
+  // 1. Density
+  p.forEach((el) => el.treeDensity());
+
+  // 2. Avrage age
+  const ages = p.map((el) => new Date().getFullYear() - el.buildYear);
+  const [totalAge, avgAge] = calc(ages);
+  console.log(
+    `${p.length}개의 공원은 평균적으로 지어진 지 ${avgAge}년 되었다.`
+  );
+
+  // 3. 나무가 1000그루 이상의 park
+  const i = p.map((el) => el.numTrees).findIndex((el) => el >= 1000);
+  console.log(`1000그루 이상의 나무를 가지고 있는 공원은 ${p[i].name}이다.`);
+}
+
+// REPORT STREETS
+function reportStreets(s) {
+  console.log("-----STREETS REPORT-----");
+
+  // 1. 거리의 Total, average length
+  const lengths = s.map((el) => el.length);
+  const [totalLength, avgLength] = calc(lengths);
+  console.log(
+    `${s.length}개의 거리는 총 ${totalLength}km 이고, 평균 ${avgLength}km 이다. `
+  );
+
+  // 2. size 출력
+  s.forEach((el) => el.classifyStreet);
+}
+
+reportParks(allParks);
+reportStreets(allStreets);
