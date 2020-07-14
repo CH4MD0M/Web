@@ -439,7 +439,7 @@ function SmithPerson(
   var john = new SmithPerson("John", 1990);
   var emily = new SmithPerson("Emily", 1983, "DIaz", "spnish");
   // 기본 값 설정에 오버라이딩됨.
-*/
+
 
 /////////////////////////////////////////////
 // Lecture 114: Maps
@@ -482,3 +482,46 @@ for (let [key, value] of question.entries()) {
 const ans = parseInt(prompt("Write the correct answer"));
 console.log(question.get(ans === question.get("correct"))); // === console.log(question.get(true);
 // ( 3(ans) = 3(correct) ) --> true
+*/
+
+/////////////////////////////////////////////
+// Lecture 115: Classes
+
+// ES5
+var Person5 = function (name, yearOfBirth, job) {
+  this.name = name;
+  this.yearOfBirth = yearOfBirth;
+  this.job = job;
+};
+
+Person5.prototype.calculateAge = function () {
+  var age = new Date().getFullYear - this.yearOfBirth;
+  console.log(age);
+};
+
+var john5 = new Person5("John", 1990, "teacher");
+
+// ES6
+class Person6 {
+  // 모든 클래스에는 생성자 메서드가 있어야 한다.
+  constructor(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+  } // 메서드를 ;(세미콜론) 또는 ,(콤마)로 구분하지 않음.
+
+  // ES5처럼 prototype을 사용하지 않음.
+  calculateAge() {
+    var age = new Date().getFullYear() - this.yearOfBirth;
+    console.log(age);
+  }
+
+  // 정적 메서드는 클래스 인스턴스에 의해 상속되지 않는다.
+  static greeting() {
+    console.log("Hey there!");
+  }
+}
+
+const john6 = new Person6("John", 1990, "teacher");
+
+Person6.greeting();
