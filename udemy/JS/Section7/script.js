@@ -482,7 +482,7 @@ for (let [key, value] of question.entries()) {
 const ans = parseInt(prompt("Write the correct answer"));
 console.log(question.get(ans === question.get("correct"))); // === console.log(question.get(true);
 // ( 3(ans) = 3(correct) ) --> true
-*/
+
 
 /////////////////////////////////////////////
 // Lecture 115: Classes
@@ -495,7 +495,7 @@ var Person5 = function (name, yearOfBirth, job) {
 };
 
 Person5.prototype.calculateAge = function () {
-  var age = new Date().getFullYear - this.yearOfBirth;
+  var age = new Date().getFullYear() - this.yearOfBirth;
   console.log(age);
 };
 
@@ -525,3 +525,74 @@ class Person6 {
 const john6 = new Person6("John", 1990, "teacher");
 
 Person6.greeting();
+*/
+
+/////////////////////////////////////////////
+// Lecture 116: Classes and subclasses
+// https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+
+// ES5
+// Person5 - 상위클래스
+var Person5 = function (name, yearOfBirth, job) {
+  this.name = name;
+  this.yearOfBirth = yearOfBirth;
+  this.job = job;
+};
+
+// 상위클래스 메서드
+Person5.prototype.calculateAge = function () {
+  var age = new Date().getFullYear() - this.yearOfBirth;
+  console.log(age);
+};
+
+// Athelete5 - 하위클래스
+var Athelete5 = function (name, yearOfBirth, job, olympicGames, medals) {
+  Person5.call(this, name, yearOfBirth, job);
+  this.olympicGames = olympicGames;
+  this.medals = medals;
+};
+
+// ES5에서의 상속.
+// 하위클래스는 상위클래스를 확장
+Athelete5.prototype = Object.create(Person5.prototype);
+
+// 상위클래스와 하위클래스를 연결한 후에 하위클래스의 메서드를 설정 가능.
+Athelete5.prototype.wonMedal = function () {
+  this.medals++;
+  console.log(this.medals);
+};
+
+var johnAthelete5 = new Athelete5("John", 1990, "swimmer", 3, 10);
+johnAthelete5.calculateAge();
+johnAthelete5.wonMedal();
+
+// ES6
+class Person6 {
+  constructor(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+  }
+
+  calculateAge() {
+    var age = new Date().getFullYear() - this.yearOfBirth;
+    console.log(age);
+  }
+}
+
+class Athelete6 extends Person6 {
+  constructor(name, yearOfBirth, job, olympicGames, medals) {
+    super(name, yearOfBirth, job);
+    this.olympicGames = olympicGames;
+    this.medals = medals;
+  }
+
+  wonMedal() {
+    this.medals++;
+    console.log(this.medals);
+  }
+}
+
+const johnAthelete6 = new Athelete6("John", 1990, "swimmer", 3, 10);
+johnAthelete6.calculateAge();
+johnAthelete6.wonMedal();
