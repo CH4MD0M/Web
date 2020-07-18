@@ -681,7 +681,7 @@ const allStreets = [
 
 // CALCULATE TOTAL & Avg.
 function calc(arr) {
-  const sum = arr.reduce((prev, cur, index) => prev + cur, 0);
+  const sum = arr.reduce((prev, cur) => prev + cur);
   return [sum, sum / arr.length];
 }
 
