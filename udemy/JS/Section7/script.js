@@ -64,6 +64,14 @@ for (let i = 0; i < 5; i++) {
 
 console.log(i);
 
+0
+1
+2
+3
+4
+23
+
+
 // var
 var i = 23;
 for (var i = 0; i < 5; i++) {
@@ -71,6 +79,8 @@ for (var i = 0; i < 5; i++) {
 }
 
 console.log(i);
+
+// SyntaxError: 'i' has already been declared.
 
 
 /////////////////////////////////////////////
@@ -147,13 +157,14 @@ console.log(ages5);
 // ES6
 // const ages6 = years.map((el) => 2020 - el);
 
+console.log(ages6);
 let ages6 = years.map((el) => 2020 - el);
 // 밑의 예제를 위해 let으로 변경.
-console.log(ages6);
 
 ages6 = years.map((el, index) => `Age element ${index + 1}: ${2020 - el}`);
 console.log(ages6);
 
+// Date() 메서드를 사용
 ages6 = years.map((el, index) => {
   const now = new Date().getFullYear();
   const age = now - el;
