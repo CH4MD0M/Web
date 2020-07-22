@@ -148,7 +148,7 @@ async function getRecipesAW() {
   return recipe;
 }
 getRecipesAW().then((result) => console.log(result));
-*/
+
 
 // // ////////////////////////////////////////
 // // Lecture 125: AJAX
@@ -159,13 +159,13 @@ getRecipesAW().then((result) => console.log(result));
 // 2. 3rd-party APIs.( Google Map, Weather data, Mivies data, Send email or SMS)
 
 // // ////////////////////////////////////////
-// // Lecture 126: Making AJAX calls with Fetch and Promises
+// // Lecture 126: Making AJAX calls with Fetch and Promise(Fetch와 Promise로 AJAX 가져오기)
 function getWeather(woeid) {
   fetch(
     `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`
   )
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       return result.json();
     })
     .then((data) => {
@@ -175,9 +175,42 @@ function getWeather(woeid) {
         `${data.title}의 최저기온은 ${today.min_temp}, 최고기온은 ${today.max_temp} 입니다.`
       );
     })
+
     .catch((error) => {
       console.log(error);
     });
 }
 getWeather(1132599);
 getWeather(44418);
+*/
+
+async function getWeatherAW(woeid) {
+  try {
+    const result = await fetch(
+      `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`
+    );
+
+    const data = await result.json();
+    const today = data.consolidated_weather[0];
+    const tomorrow = data.consolidated_weather[1];
+    console.log(
+      "---------------------------------------------------------------------"
+    );
+    console.log(
+      `${data.title}의 최저기온은 ${today.min_temp}, 최고기온은 ${today.max_temp} 입니다.`
+    );
+    console.log(
+      `내일 ${data.title}의 최저기온은 ${tomorrow.min_temp}, 최고기온은 ${tomorrow.max_temp} 입니다.`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+getWeatherAW(1132599);
+
+let dataLondon;
+getWeatherAW(44418).then((data) => {
+  dataLondon = data;
+  console.log(`${data.title}의 data`, dataLondon);
+});
