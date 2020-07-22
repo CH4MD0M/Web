@@ -58,7 +58,7 @@ function getRecipe() {
   }, 1500);
 }
 getRecipe();
-*/
+
 
 // ////////////////////////////////////////
 // Lecture 123: Callback Hell and Promise
@@ -148,3 +148,36 @@ async function getRecipesAW() {
   return recipe;
 }
 getRecipesAW().then((result) => console.log(result));
+*/
+
+// // ////////////////////////////////////////
+// // Lecture 125: AJAX
+// AJAX : Asynchronous JavaScript And Xml
+// API : Application Programming Interface
+// API 자체가 서버는 아님. ( 서버의 일부 )
+// 1. Your own API, for data coming from your own server.
+// 2. 3rd-party APIs.( Google Map, Weather data, Mivies data, Send email or SMS)
+
+// // ////////////////////////////////////////
+// // Lecture 126: Making AJAX calls with Fetch and Promises
+function getWeather(woeid) {
+  fetch(
+    `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`
+  )
+    .then((result) => {
+      console.log(result);
+      return result.json();
+    })
+    .then((data) => {
+      // console.log(data);
+      const today = data.consolidated_weather[0];
+      console.log(
+        `${data.title}의 최저기온은 ${today.min_temp}, 최고기온은 ${today.max_temp} 입니다.`
+      );
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+getWeather(1132599);
+getWeather(44418);
