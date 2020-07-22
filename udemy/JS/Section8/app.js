@@ -58,7 +58,6 @@ function getRecipe() {
   }, 1500);
 }
 getRecipe();
-
 */
 
 // ////////////////////////////////////////
@@ -73,7 +72,12 @@ const getRecipe = (recID) => {
   return new Promise((resolve, reject) => {
     setTimeout(
       (ID) => {
-        var recipe = { title: "Fresh tomato pasta", publisher: "Dom" };
+        var recipe = {
+          id: 432,
+          title: "Fresh tomato pasta",
+          publisher: "Dom",
+        };
+
         resolve(recipe);
       },
       1500,
@@ -86,7 +90,11 @@ const getRelated = (publisher) => {
   return new Promise((resolve, reject) => {
     setTimeout(
       (pub) => {
-        var recipe = { title: "Italian Pizza", publisher };
+        var recipe = {
+          title: "Italian pizza",
+          publisher,
+        };
+
         resolve(recipe);
       },
       1500,
@@ -94,25 +102,49 @@ const getRelated = (publisher) => {
     );
   });
 };
+// async/await을 위한 주석처리.
 
-getIDs
-  .then((IDs) => {
-    console.log(IDs);
-    // (4) [524, 883, 432, 974]
-    return getRecipe(IDs[2]);
-  })
+// getIDs
+//   .then((IDs) => {
+//     console.log(IDs);
+//     // (4) [524, 883, 432, 974]
+//     return getRecipe(IDs[2]);
+//   })
 
-  .then((recipe) => {
-    console.log(recipe);
-    // { title: "Fresh tomato pasta", publisher: "Dom"}
-    return getRelated(recipe.publisher);
-  })
+//   .then((recipe) => {
+//     console.log(recipe);
+//     // { id: 432, title: "Fresh tomato pasta", publisher: "Dom"}
 
-  .then((recipe) => {
-    console.log(recipe);
-    // { title: "Italian Pizza", publisher : "Dom"}
-  })
+//     return getRelated(recipe.publisher);
+//   })
 
-  .catch((error) => {
-    console.log("Error!!");
-  });
+//   .then((recipe) => {
+//     console.log(recipe);
+//     // { title: "Italian Pizza", publisher : "Dom" }
+//   })
+
+//   .catch((error) => {
+//     console.log("Error!!");
+//   });
+
+// // ////////////////////////////////////////
+// // Lecture 124: Async/Await
+
+async function getRecipesAW() {
+  const IDs = await getIDs;
+  // -> getIDs의 resolve 값을 IDs변수에 저장한다.
+
+  // await에서 Promise가 수행될 때까지 코드 실행이 중지된다.
+  // await은 Promise의 resolve 값이다.
+
+  console.log(IDs);
+
+  const recipe = await getRecipe(IDs[2]);
+  console.log(recipe);
+
+  const related = await getRelated(recipe.publisher);
+  console.log(related);
+
+  return recipe;
+}
+getRecipesAW().then((result) => console.log(result));
