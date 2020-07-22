@@ -25,7 +25,7 @@ first();
 // ////////////////////////////////////////
 // Lecture 121: The Event Loop
 // 슬라이드 강의. 코드없음.
-*/
+
 
 // ////////////////////////////////////////
 // Lecture 122: Asynchronous with Callback (비동기처리와 콜백)
@@ -38,15 +38,16 @@ function getRecipe() {
     setTimeout(
       (id) => {
         const recipe = { title: "Fresh tomato pasta", publisher: "Dom" };
-        console.log(`${id}: ${recipe.title} : ${recipe.publisher}`); // 432: Fresh tomato pasta
+        console.log(`${id}: ${recipe.title} : ${recipe.publisher}`);
+        // 432: Fresh tomato pasta : Dom
 
         setTimeout(
-          (id, publisher) => {
-            const recipe2 = { title: "Italian Pizza" };
-            console.log(`${id}: ${recipe2.title} : ${publisher}`);
+          (publisher) => {
+            const recipe2 = { title: "Italian Pizza", publisher };
+            console.log(`${recipe2.title} : ${recipe2.publisher}`);
+            // Italian Pizza : Dom
           },
           1500,
-          recipeID[3],
           recipe.publisher
         );
       },
@@ -57,3 +58,61 @@ function getRecipe() {
   }, 1500);
 }
 getRecipe();
+
+*/
+
+// ////////////////////////////////////////
+// Lecture 123: Callback Hell and Promise
+const getIDs = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve([523, 883, 432, 974]);
+  }, 1500);
+});
+
+const getRecipe = (recID) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(
+      (ID) => {
+        var recipe = { title: "Fresh tomato pasta", publisher: "Dom" };
+        resolve(recipe);
+      },
+      1500,
+      recID
+    );
+  });
+};
+
+const getRelated = (publisher) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(
+      (pub) => {
+        var recipe = { title: "Italian Pizza", publisher };
+        resolve(recipe);
+      },
+      1500,
+      publisher
+    );
+  });
+};
+
+getIDs
+  .then((IDs) => {
+    console.log(IDs);
+    // (4) [524, 883, 432, 974]
+    return getRecipe(IDs[2]);
+  })
+
+  .then((recipe) => {
+    console.log(recipe);
+    // { title: "Fresh tomato pasta", publisher: "Dom"}
+    return getRelated(recipe.publisher);
+  })
+
+  .then((recipe) => {
+    console.log(recipe);
+    // { title: "Italian Pizza", publisher : "Dom"}
+  })
+
+  .catch((error) => {
+    console.log("Error!!");
+  });
