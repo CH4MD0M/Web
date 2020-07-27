@@ -60,8 +60,15 @@ function getRecipe() {
 getRecipe();
 
 
+
 // ////////////////////////////////////////
 // Lecture 123: Callback Hell and Promise
+
+// 대기(pending): 초기 상태. -> resolve 또는 reject 함수가 호출되지 않은 상태
+// 이행(fulfilled): 비동기 처리가 성공적으로 완료됨. -> resolve 함수가 호출된 상태
+// 거부(rejected): 비동기 처리가 실패함. -> reject 함수가 호출된 상태
+// (settled): 비동기 처리가 수행됨. -> resolve 또는 reject 함수가 호출된 상태
+
 const getIDs = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve([523, 883, 432, 974]);
