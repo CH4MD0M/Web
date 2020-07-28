@@ -44,3 +44,15 @@ elements.searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   controlSearch();
 });
+
+elements.searchResPages.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-inline");
+  if (btn) {
+    const goToPage = parseInt(btn.dataset.goto, 10);
+    // string(문자열)이 아닌 integer(숫자)로 반환하기 위해
+    // parseInt()메서드를 사용.
+
+    searchView.clearResults();
+    searchView.renderResults(state.search.result, goToPage);
+  }
+});
