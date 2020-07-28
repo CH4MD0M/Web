@@ -1,7 +1,7 @@
 import Search from "./models/Search";
 import * as searchView from "./views/searchView";
 // searchView.js에서 *(all)을 가져오는데 이름을 searchView로 지정(as)
-import { elements } from "./views/base";
+import { elements, renderLoader, clearLoader } from "./views/base";
 
 /**  Global state of the app
  * - Search object
@@ -23,6 +23,7 @@ const controlSearch = async () => {
     // 3) Prepare UI for results.
     searchView.clearInput();
     searchView.clearResults();
+    renderLoader(elements.searchRes);
 
     // 4) Search for recipes.
     await state.search.getResults();
@@ -33,6 +34,7 @@ const controlSearch = async () => {
     // getResults()함수를 호출하는 controlSearch 함수도 async함수로 작성한다.
 
     // 5) render results on UI.
+    clearLoader();
     searchView.renderResults(state.search.result);
     // result = res.data.recipes
   }
