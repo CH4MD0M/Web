@@ -29,18 +29,24 @@ const controlSearch = async () => {
     searchView.clearResults();
     renderLoader(elements.searchRes);
 
-    // 4) Search for recipes.
-    await state.search.getResults();
-    // getResults()함수가 async 함수로 비동기함수이기 때문에,
-    // await을 작성한다.
+    try {
+      // 4) Search for recipes.
+      await state.search.getResults();
+      // getResults()함수가 async 함수로 비동기함수이기 때문에,
+      // await을 작성한다.
 
-    // getResults()함수는 promise를 반환하는 async함수이기 때문에,
-    // getResults()함수를 호출하는 controlSearch 함수도 async함수로 작성한다.
+      // getResults()함수는 promise를 반환하는 async함수이기 때문에,
+      // getResults()함수를 호출하는 controlSearch 함수도 async함수로 작성한다.
 
-    // 5) render results on UI.
-    clearLoader();
-    searchView.renderResults(state.search.result);
-    // result = res.data.recipes
+      // 5) render results on UI.
+      clearLoader();
+
+      searchView.renderResults(state.search.result);
+      // result = res.data.recipes
+    } catch (err) {
+      alert("Something wrong with the search...");
+      clearLoader();
+    }
   }
 };
 
@@ -64,6 +70,38 @@ elements.searchResPages.addEventListener("click", (e) => {
 /* 
 -- RECIPE CONTROLLER -- 
 */
-const r = new Recipe(47746);
-r.getRecipe();
-console.log(r);
+// const r = new Recipe(47746);
+// r.getRecipe();
+// console.log(r);
+
+const controlRecipe = async () => {
+  // url에서 #뒤의 hash값을 받아옴.
+  const id = window.location.hash.replace("#", "");
+  console.log(id);
+
+  if (id) {
+    // Prepare UI for changes
+    // Create new recipe object
+    state.recipe = new Recipe(id);
+
+    try {
+      // Get recipe data
+      await state.recipe.getRecipe();
+
+      // Calculate servings and time
+      state.recipe.calcTime();
+      state.recipe.calcServings();
+
+      // Render recipe
+      console.log(state.recipe);
+    } catch (err) {
+      alert("Error Processing recipe!");
+    }
+  }
+};
+
+// window.addEventListener("hashchange", controlRecipe);
+// window.addEventListener("load", controlRecipe);
+["hashchange", "load"].forEach((event) =>
+  window.addEventListener(event, controlRecipe)
+);
