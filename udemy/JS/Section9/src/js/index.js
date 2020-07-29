@@ -1,4 +1,5 @@
 import Search from "./models/Search";
+import Recipe from "./models/Recipe";
 import * as searchView from "./views/searchView";
 // searchView.js에서 *(all)을 가져오는데 이름을 searchView로 지정(as)
 import { elements, renderLoader, clearLoader } from "./views/base";
@@ -11,6 +12,9 @@ import { elements, renderLoader, clearLoader } from "./views/base";
  */
 const state = {};
 
+/* 
+-- SEARCH CONTROLLER -- 
+*/
 const controlSearch = async () => {
   // 1) View에서 query를 가져옴.
   // const query = "pizza";   // TODO
@@ -56,3 +60,10 @@ elements.searchResPages.addEventListener("click", (e) => {
     searchView.renderResults(state.search.result, goToPage);
   }
 });
+
+/* 
+-- RECIPE CONTROLLER -- 
+*/
+const r = new Recipe(47746);
+r.getRecipe();
+console.log(r);
