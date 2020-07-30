@@ -59,6 +59,8 @@ export default class Recipe {
       "pound",
     ];
 
+    const units = [...unitsShort, "kg", "g"];
+
     /*
      ingredients: Array(6)
         0 : "4 1/2 cups (20.25 ounces) unbleached high-gluten, bread, or all-purpose flour, chilled"
@@ -105,7 +107,7 @@ export default class Recipe {
       2: "tsp"
       3: "salt"
       */
-      const unitIndex = arrIng.findIndex((el2) => unitsShort.includes(el2));
+      const unitIndex = arrIng.findIndex((el2) => units.includes(el2));
       // el2는 arrIng배열
       // findIndex()메서드는 판별함수의 만족하는 값이 없으면 -1을 반환한다.
       //   console.log(unitIndex);
@@ -178,6 +180,6 @@ export default class Recipe {
     // console.log(this.ingredients);
 
     this.ingredients = newIngredients;
-    // console.log(this.ingredients);
+    console.log(this.ingredients);
   }
 }
