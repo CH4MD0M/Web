@@ -77,7 +77,7 @@ elements.searchResPages.addEventListener("click", (e) => {
 const controlRecipe = async () => {
   // url에서 #뒤의 hash값을 받아옴.
   const id = window.location.hash.replace("#", "");
-  console.log(id);
+  // console.log(id);
 
   if (id) {
     // Prepare UI for changes
@@ -85,8 +85,9 @@ const controlRecipe = async () => {
     state.recipe = new Recipe(id);
 
     try {
-      // Get recipe data
+      // Get recipe data and parse ingredients
       await state.recipe.getRecipe();
+      state.recipe.parseIngredients();
 
       // Calculate servings and time
       state.recipe.calcTime();
@@ -94,6 +95,7 @@ const controlRecipe = async () => {
 
       // Render recipe
       console.log(state.recipe);
+      // console.log(state.recipe.ingredients);
     } catch (err) {
       alert("Error Processing recipe!");
     }
