@@ -180,6 +180,6 @@ export default class Recipe {
     // console.log(this.ingredients);
 
     this.ingredients = newIngredients;
-    console.log(this.ingredients);
+    // console.log(this.ingredients);
   }
 }

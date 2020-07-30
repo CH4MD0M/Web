@@ -14,6 +14,20 @@ export const clearResults = () => {
   elements.searchResPages.innerHTML = "";
 };
 
+export const highLightSelected = (id) => {
+  const resultsArr = Array.from(document.querySelectorAll(".results__link"));
+  // Array.from() 메서드는 유사 배열 객체(array-like object)나 반복 가능한 객체(iterable object)를
+  // 얕게 복사해 새로운 Array객체를 만듭니다.
+
+  resultsArr.forEach((el) => {
+    el.classList.remove("results__link--active");
+  });
+
+  document
+    .querySelector(`a[href="#${id}"]`)
+    .classList.add("results__link--active");
+};
+
 /*
 * Example:
 // 'Pasta with tomato and spinach'
