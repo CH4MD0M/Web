@@ -31,6 +31,8 @@ const formatCount = (count) => {
   return "?";
 };
 
+// 재료(ingredient)부분 html 추가
+//
 const createIngredient = (ingredient) => `
     <li class="recipe__item">
         <svg class="recipe__icon">
@@ -49,6 +51,22 @@ export const clearRecipe = () => {
 };
 
 export const renderRecipe = (recipe) => {
+  // recipeView.renderRecipe(state.recipe);
+  // recipe = state.recipe
+  // state.recipe = new Recipe(id);
+
+  /*
+    *Recipe 클래스
+    author: "101 Cookbooks"
+    id: "47746"
+    img: "http://forkify-api.herokuapp.com/images/best_pizza_dough_recipe1b20.jpg"
+    ingredients: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+    servings: 4
+    time: 30
+    title: "Best Pizza Dough Ever"
+    url: "http://www.101cookbooks.com/archives/001199.html"
+  */
+
   const markup = `
             <figure class="recipe__fig">
                 <img src="${recipe.img}" alt="${
@@ -104,19 +122,21 @@ export const renderRecipe = (recipe) => {
                 ${
                   recipe.ingredients.map((el) => createIngredient(el)).join("")
                   /*
+                  
                         * recipe.ingredients
+                        0: {count: 4.5, unit: "cup", ingredient: "unbleached high-gluten, bread, or all-purpose flour, chilled"}
+                        1: {count: 1.75, unit: "tsp", ingredient: "salt"}
+                        2: {count: 1, unit: "tsp", ingredient: "instant yeast"}
+                        3: {count: 0.25, unit: "cup", ingredient: "olive oil "}
+                        4: {count: 1.75, unit: "cup", ingredient: "water, ice cold "}
+                        5: {count: 1, unit: "", ingredient: "semolina flour or cornmeal for dusting"}
 
-                        author: "The Pioneer Woman"
-                        id: "46956"
-                        img: "http://forkify-api.herokuapp.com/images/fruitpizza9a19.jpg"
-                        ingredients: (17) [{…}, {…}, {…}, ...]
-                        servings: 4
-                        time: 90
-                        title: "---"
-                        url: "---"
+                        
 
-                        Recipe.js에서 ingredients에 objIng를 return하여 위와 같은 형태이다.
-                        각 요소들을 createIngredient함수의 인자로 보낸다.                        
+                        // Recipe.js에서 ingredients에 objIng를 return하면 위와 같은 형태이다.
+                        // 각 요소들을 createIngredient함수의 매개변수로 보내 함수를 실행한다.
+                        // 함수를 실행한 html코드들을 (<li>태그들을) join()한 값을 저장한다.
+
                     */
                 }
                 </ul>
@@ -147,5 +167,6 @@ export const renderRecipe = (recipe) => {
                 </a>
             </div>
     `;
+
   elements.recipe.insertAdjacentHTML("afterbegin", markup);
 };
