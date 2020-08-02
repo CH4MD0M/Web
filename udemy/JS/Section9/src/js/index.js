@@ -117,3 +117,25 @@ const controlRecipe = async () => {
 ["hashchange", "load"].forEach((event) =>
   window.addEventListener(event, controlRecipe)
 );
+
+// Handling recipe Servings control( 인분수 버튼 )
+/* 
+  servings 버튼은 앱이 실행되었을 때 DOM에 없고
+  recipeView가 실행되었을때 나타나는 DOM이므로
+  recipe <div> 태그에 eventListener를 걸고 
+  target으로 btn_tiny <button>태그를 지정한다.
+*/
+elements.recipe.addEventListener("click", (e) => {
+  if (e.target.matches(".btn-decrease, .btn-decrease *")) {
+    // Decrease button is clicked
+    if (state.recipe.servings > 1) {
+      state.recipe.updateServings("dec");
+      recipeView.updateServingsIngredients(state.recipe);
+    }
+  } else if (e.target.matches(".btn-increase, .btn-increase *")) {
+    // Increase button is clicked
+
+    state.recipe.updateServings("inc");
+    recipeView.updateServingsIngredients(state.recipe);
+  }
+});

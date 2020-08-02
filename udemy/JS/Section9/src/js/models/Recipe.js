@@ -182,4 +182,18 @@ export default class Recipe {
     this.ingredients = newIngredients;
     // console.log(this.ingredients);
   }
+
+  updateServings(type) {
+    // type= dec OR inc
+    // Servings
+    const newServings = type === "dec" ? this.servings - 1 : this.servings + 1;
+
+    // Ingredients
+    this.ingredients.forEach((ing) => {
+      // ing = 각 루프의 ingredients 값.
+      ing.count *= newServings / this.servings;
+    });
+
+    this.servings = newServings;
+  }
 }
