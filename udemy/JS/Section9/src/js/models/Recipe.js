@@ -183,14 +183,24 @@ export default class Recipe {
     // console.log(this.ingredients);
   }
 
+  // Servings 계산
   updateServings(type) {
-    // type= dec OR inc
+    // type = 'dec' OR 'inc'
     // Servings
     const newServings = type === "dec" ? this.servings - 1 : this.servings + 1;
 
     // Ingredients
     this.ingredients.forEach((ing) => {
       // ing = 각 루프의 ingredients 값.
+      /*
+      0: {count: 4.5, unit: "cup", ingredient: "unbleached high-gluten, bread, or all-purpose flour, chilled"}
+      1: {count: 1.75, unit: "tsp", ingredient: "salt"}
+      2: {count: 1, unit: "tsp", ingredient: "instant yeast"}
+      3: {count: 0.25, unit: "cup", ingredient: "olive oil "}
+      4: {count: 1.75, unit: "cup", ingredient: "water, ice cold "}
+      5: {count: 1, unit: "", ingredient: "semolina flour or cornmeal for dusting"}
+       */
+
       ing.count *= newServings / this.servings;
     });
 

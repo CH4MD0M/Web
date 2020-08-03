@@ -1,5 +1,6 @@
 import Search from "./models/Search";
 import Recipe from "./models/Recipe";
+import List from "./models/List";
 import * as searchView from "./views/searchView";
 // searchView.js에서 *(all)을 가져오는데 이름을 searchView로 지정(as)
 import * as recipeView from "./views/recipeView";
@@ -125,6 +126,7 @@ const controlRecipe = async () => {
   recipe <div> 태그에 eventListener를 걸고 
   target으로 btn_tiny <button>태그를 지정한다.
 */
+
 elements.recipe.addEventListener("click", (e) => {
   if (e.target.matches(".btn-decrease, .btn-decrease *")) {
     // Decrease button is clicked
@@ -139,3 +141,9 @@ elements.recipe.addEventListener("click", (e) => {
     recipeView.updateServingsIngredients(state.recipe);
   }
 });
+
+/* 
+-- LIST CONTROLLER -- 
+*/
+
+window.l = new List();

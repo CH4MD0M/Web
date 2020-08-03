@@ -171,7 +171,12 @@ export const renderRecipe = (recipe) => {
   elements.recipe.insertAdjacentHTML("afterbegin", markup);
 };
 
+// Servings 계산 출력
 export const updateServingsIngredients = (recipe) => {
+  // recipeView.updateServingsIngredients(state.recipe);
+  // recipe = state.recipe
+  // state.recipe = new Recipe(id);
+
   // Update counts
   document.querySelector(".recipe__info-data--people").textContent =
     recipe.servings;
