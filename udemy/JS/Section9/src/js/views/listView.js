@@ -1,5 +1,4 @@
 import { elements } from "./base";
-import { mark } from "regenerator-runtime";
 
 export const renderItem = (item) => {
   const markup = `
@@ -20,6 +19,6 @@ export const renderItem = (item) => {
 };
 
 export const deleteItem = (id) => {
-  const item = document.querySelector(`[data-item="${id}"]`);
-  item.parentElement.removeChild(item);
+  const item = document.querySelector(`[data-itemid="${id}"]`);
+  if (item) item.parentElement.removeChild(item);
 };

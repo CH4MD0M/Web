@@ -4,6 +4,7 @@ import List from "./models/List";
 import * as searchView from "./views/searchView";
 // searchView.js에서 *(all)을 가져오는데 이름을 searchView로 지정(as)
 import * as recipeView from "./views/recipeView";
+import * as listeView from "./views/listView";
 import { elements, renderLoader, clearLoader } from "./views/base";
 
 /**  Global state of the app
@@ -13,6 +14,7 @@ import { elements, renderLoader, clearLoader } from "./views/base";
  * - Liked recipes
  */
 const state = {};
+window.state = state;
 
 /* 
 -- SEARCH CONTROLLER -- 
@@ -119,6 +121,41 @@ const controlRecipe = async () => {
   window.addEventListener(event, controlRecipe)
 );
 
+/* 
+-- LIST CONTROLLER -- 
+*/
+
+// window.l = new List();
+const controlList = () => {
+  // Create a new list IF there in none yet
+  if (!state.list) state.list = new List();
+
+  // Add each ingredient to the list and UI
+  state.recipe.ingredients.forEach((el) => {
+    const item = state.list.addItem(el.count, el.unit, el.ingredient);
+    listeView.renderItem(item);
+  });
+};
+
+// Handle delete and update list item event
+elements.shopping.addEventListener("click", (e) => {
+  const id = e.target.closest(".shopping__item").dataset.itemid;
+
+  // Handle the delete button
+  if (e.target.matches(".shopping__delete, .shopping__delete *")) {
+    // Delete from state
+    state.list.deleteItem(id);
+
+    // Delete from UI
+    listeView.deleteItem(id);
+
+    // Handle the count update
+  } else if (e.target.matches(".shopping__count-value")) {
+    const val = parseFloat(e.target.vlaue);
+    state.list.updateCount(id, val);
+  }
+});
+
 // Handling recipe Servings control( 인분수 버튼 )
 /* 
   servings 버튼은 앱이 실행되었을 때 DOM에 없고
@@ -139,11 +176,7 @@ elements.recipe.addEventListener("click", (e) => {
 
     state.recipe.updateServings("inc");
     recipeView.updateServingsIngredients(state.recipe);
+  } else if (e.target.matches(".recipe__btn--add, recipe__btn--add *")) {
+    controlList();
   }
 });
-
-/* 
--- LIST CONTROLLER -- 
-*/
-
-window.l = new List();
