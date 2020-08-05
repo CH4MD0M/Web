@@ -6,6 +6,7 @@ import * as searchView from "./views/searchView";
 // searchView.js에서 *(all)을 가져오는데 이름을 searchView로 지정(as)
 import * as recipeView from "./views/recipeView";
 import * as listeView from "./views/listView";
+import * as likesView from "./views/likesView";
 import { elements, renderLoader, clearLoader } from "./views/base";
 
 /**  Global state of the app
@@ -107,7 +108,7 @@ const controlRecipe = async () => {
 
       // Render recipe
       clearLoader();
-      recipeView.renderRecipe(state.recipe);
+      recipeView.renderRecipe(state.recipe, state.likes.isLiked(id));
       // console.log(state.recipe);
       // console.log(state.recipe.ingredients);
     } catch (err) {
@@ -182,9 +183,11 @@ elements.shopping.addEventListener("click", (e) => {
 /* 
 ---- LIKE CONTROLLER ----
 */
+state.likes = new Likes();
+likesView.toggleLikeMenu(state.likes.getNumLikes());
+
 const controlLike = () => {
   if (!state.likes) state.likes = new Likes();
-
   const currentID = state.recipe.id;
 
   // User has NOT yet liked current recipe
@@ -197,9 +200,11 @@ const controlLike = () => {
       state.recipe.img
     );
     //Toggle the like button
+    likesView.toggleLikeBtn(true);
 
     // Add like to UI list
-    console.log(state.likes);
+    likesView.renderLike(newLike);
+    // console.log(state.likes);
 
     // User HAS yet liked current recipe
   } else {
@@ -207,8 +212,11 @@ const controlLike = () => {
     state.likes.deleteLike(currentID);
 
     // Toggle the like button
+    likesView.toggleLikeBtn(false);
 
     // Remove like from UI list
-    console.log(state.likes);
+    likesView.deleteLike(currentID);
+    // console.log(state.likes);
   }
+  likesView.toggleLikeMenu(state.likes.getNumLikes());
 };

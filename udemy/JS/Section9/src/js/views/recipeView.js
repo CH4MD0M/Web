@@ -50,7 +50,7 @@ export const clearRecipe = () => {
   elements.recipe.innerHTML = "";
 };
 
-export const renderRecipe = (recipe) => {
+export const renderRecipe = (recipe, isLiked) => {
   // recipeView.renderRecipe(state.recipe);
   // recipe = state.recipe
   // state.recipe = new Recipe(id);
@@ -112,7 +112,9 @@ export const renderRecipe = (recipe) => {
                 </div>
                 <button class="recipe__love">
                     <svg class="header__likes">
-                        <use href="img/icons.svg#icon-heart-outlined"></use>
+                        <use href="img/icons.svg#icon-heart${
+                          isLiked ? "" : "-outlined"
+                        }"></use>
                     </svg>
                 </button>
             </div>
