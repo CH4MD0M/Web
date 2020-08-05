@@ -151,7 +151,7 @@ elements.shopping.addEventListener("click", (e) => {
 
     // Handle the count update
   } else if (e.target.matches(".shopping__count-value")) {
-    const val = parseFloat(e.target.vlaue);
+    const val = parseFloat(e.target.value, 10);
     state.list.updateCount(id, val);
   }
 });
