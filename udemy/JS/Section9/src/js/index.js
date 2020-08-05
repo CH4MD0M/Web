@@ -1,6 +1,7 @@
 import Search from "./models/Search";
 import Recipe from "./models/Recipe";
 import List from "./models/List";
+import Likes from "./models/Likes";
 import * as searchView from "./views/searchView";
 // searchView.js에서 *(all)을 가져오는데 이름을 searchView로 지정(as)
 import * as recipeView from "./views/recipeView";
@@ -17,7 +18,7 @@ const state = {};
 window.state = state;
 
 /* 
--- SEARCH CONTROLLER -- 
+---- SEARCH CONTROLLER ----
 */
 const controlSearch = async () => {
   // 1) View에서 query를 가져옴.
@@ -72,7 +73,7 @@ elements.searchResPages.addEventListener("click", (e) => {
 });
 
 /* 
--- RECIPE CONTROLLER -- 
+---- RECIPE CONTROLLER ----
 */
 // const r = new Recipe(47746);
 // r.getRecipe();
@@ -121,8 +122,30 @@ const controlRecipe = async () => {
   window.addEventListener(event, controlRecipe)
 );
 
+// Handling recipe button control
+elements.recipe.addEventListener("click", (e) => {
+  if (e.target.matches(".btn-decrease, .btn-decrease *")) {
+    // Decrease button is clicked
+    if (state.recipe.servings > 1) {
+      state.recipe.updateServings("dec");
+      recipeView.updateServingsIngredients(state.recipe);
+    }
+  } else if (e.target.matches(".btn-increase, .btn-increase *")) {
+    // Increase button is clicked
+
+    state.recipe.updateServings("inc");
+    recipeView.updateServingsIngredients(state.recipe);
+  } else if (e.target.matches(".recipe__btn--add, recipe__btn--add *")) {
+    // Add button is clicked
+
+    controlList();
+  } else if (e.target.matches(".recipe__love, .recipe__love *")) {
+    controlLike();
+  }
+});
+
 /* 
--- LIST CONTROLLER -- 
+---- LIST CONTROLLER ----
 */
 
 // window.l = new List();
@@ -156,27 +179,36 @@ elements.shopping.addEventListener("click", (e) => {
   }
 });
 
-// Handling recipe Servings control( 인분수 버튼 )
 /* 
-  servings 버튼은 앱이 실행되었을 때 DOM에 없고
-  recipeView가 실행되었을때 나타나는 DOM이므로
-  recipe <div> 태그에 eventListener를 걸고 
-  target으로 btn_tiny <button>태그를 지정한다.
+---- LIKE CONTROLLER ----
 */
+const controlLike = () => {
+  if (!state.likes) state.likes = new Likes();
 
-elements.recipe.addEventListener("click", (e) => {
-  if (e.target.matches(".btn-decrease, .btn-decrease *")) {
-    // Decrease button is clicked
-    if (state.recipe.servings > 1) {
-      state.recipe.updateServings("dec");
-      recipeView.updateServingsIngredients(state.recipe);
-    }
-  } else if (e.target.matches(".btn-increase, .btn-increase *")) {
-    // Increase button is clicked
+  const currentID = state.recipe.id;
 
-    state.recipe.updateServings("inc");
-    recipeView.updateServingsIngredients(state.recipe);
-  } else if (e.target.matches(".recipe__btn--add, recipe__btn--add *")) {
-    controlList();
+  // User has NOT yet liked current recipe
+  if (!state.likes.isLiked(currentID)) {
+    // Add like to the state
+    const newLike = state.likes.addLike(
+      currentID,
+      state.recipe.title,
+      state.recipe.author,
+      state.recipe.img
+    );
+    //Toggle the like button
+
+    // Add like to UI list
+    console.log(state.likes);
+
+    // User HAS yet liked current recipe
+  } else {
+    // Remove like from the state
+    state.likes.deleteLike(currentID);
+
+    // Toggle the like button
+
+    // Remove like from UI list
+    console.log(state.likes);
   }
-});
+};
