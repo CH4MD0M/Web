@@ -123,7 +123,7 @@ const controlRecipe = async () => {
   window.addEventListener(event, controlRecipe)
 );
 
-// Handling recipe button control
+// Recipe 페이지 버튼 이벤트
 elements.recipe.addEventListener("click", (e) => {
   if (e.target.matches(".btn-decrease, .btn-decrease *")) {
     // Decrease button is clicked
@@ -141,6 +141,8 @@ elements.recipe.addEventListener("click", (e) => {
 
     controlList();
   } else if (e.target.matches(".recipe__love, .recipe__love *")) {
+    // Like button is clicked
+
     controlLike();
   }
 });
@@ -161,7 +163,7 @@ const controlList = () => {
   });
 };
 
-// Handle delete and update list item event
+// List 페이지 버튼 이벤트
 elements.shopping.addEventListener("click", (e) => {
   const id = e.target.closest(".shopping__item").dataset.itemid;
 

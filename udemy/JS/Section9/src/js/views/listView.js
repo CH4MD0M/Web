@@ -1,6 +1,9 @@
 import { elements } from "./base";
 
 export const renderItem = (item) => {
+  // item = state.list.addItem(el.count, el.unit, el.ingredient);
+  // el = state.recipe.ingredients;
+
   const markup = `
   <li class="shopping__item" data-itemid=${item.id}>
   <div class="shopping__count">
