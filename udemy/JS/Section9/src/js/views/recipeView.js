@@ -3,9 +3,10 @@ import { Fraction } from "fractional";
 
 const formatCount = (count) => {
   if (count) {
+    const newCount = Math.round(count * 10000) / 10000;
     // count = 2.5 ---> 2 1/2
     // count = 0.5 ---> 1/2
-    const [int, dec] = count
+    const [int, dec] = newCount
       .toString()
       .split(".")
       .map((el) => parseInt(el, 10));
@@ -15,16 +16,16 @@ const formatCount = (count) => {
     // int, dec에 저장.
 
     // 소수점이 없는 경우
-    if (!dec) return count;
+    if (!dec) return newCount;
 
     // 정수가 0인 경우
     // int: 0
     // dec: 5
     if (int === 0) {
-      const fr = new Fraction(count);
+      const fr = new Fraction(newCount);
       return `${fr.numerator}/${fr.denominator}`;
     } else {
-      const fr = new Fraction(count - int);
+      const fr = new Fraction(newCount - int);
       return `${int} ${fr.numerator}/${fr.denominator}`;
     }
   }
