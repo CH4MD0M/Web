@@ -34,10 +34,15 @@ console.log(validator.isEmail("example.com")); // false
 
 // isURL
 console.log(validator.isURL("https:/mead.io")); // false
-*/
 
+
+*/
 // //////////////////////////////
 // 12. Printing in Color
 const chalk = require("chalk");
-const greenMsg = chalk.yellow.bgRed("Success");
+const greenMsg = chalk.red.inverse.bold("Success");
 console.log(greenMsg);
+
+// //////////////////////////////
+// 13. Global npm Modules and nodemon
+// Set-ExecutionPolicy RemoteSigned
