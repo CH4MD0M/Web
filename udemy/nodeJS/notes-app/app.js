@@ -23,7 +23,6 @@ const getNotes = require("./notes");
 
 const msg = getNotes();
 console.log(msg);
-*/
 
 // //////////////////////////////
 // 11. Importing NPM Module
@@ -35,3 +34,10 @@ console.log(validator.isEmail("example.com")); // false
 
 // isURL
 console.log(validator.isURL("https:/mead.io")); // false
+*/
+
+// //////////////////////////////
+// 12. Printing in Color
+const chalk = require("chalk");
+const greenMsg = chalk.yellow.bgRed("Success");
+console.log(greenMsg);
